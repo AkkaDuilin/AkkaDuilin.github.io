@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="前言 matlab笔记，备战美赛 冲鸭！！！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="matlab笔记">
+<meta property="og:url" content="http://akkaduilin.com/2022/01/17/matlab/index.html">
+<meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
+<meta property="og:description" content="前言 matlab笔记，备战美赛 冲鸭！！！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/01/17/pstS2TFVXGEo71x.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/01/17/uTdrzlhOf4jVIJq.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/01/17/aZrP1lmifzCGKJM.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/01/17/QPu2vlSCEnIe15g.jpg">
+<meta property="article:published_time" content="2022-01-17T03:17:51.000Z">
+<meta property="article:modified_time" content="2022-01-17T06:07:00.380Z">
+<meta property="article:author" content="不对de林">
+<meta property="article:tag" content="matlab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/01/17/pstS2TFVXGEo71x.jpg">
+
+
+<link rel="canonical" href="http://akkaduilin.com/2022/01/17/matlab/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/01/17/matlab/","path":"2022/01/17/matlab/","title":"matlab笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>matlab笔记 | 咸鱼享乐，摸鱼快乐</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="咸鱼享乐，摸鱼快乐" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">咸鱼享乐，摸鱼快乐</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text">矩阵和数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.1.</span> <span class="nav-text">数组创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.2.</span> <span class="nav-text">运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">1.1.4.</span> <span class="nav-text">结构体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">工作区变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%96%87%E6%9C%AC"><span class="nav-number">1.3.</span> <span class="nav-text">字符串和文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.5.1.</span> <span class="nav-text">矩阵运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.5.2.</span> <span class="nav-text">数组运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E8%A1%A8"><span class="nav-number">1.5.3.</span> <span class="nav-text">构建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%B8%B8%E9%87%8F%E5%80%BC"><span class="nav-number">1.5.4.</span> <span class="nav-text">常用常量值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E5%9B%BE%E5%92%8C%E4%B8%89%E7%BB%B4%E5%9B%BE"><span class="nav-number">1.6.</span> <span class="nav-text">二维图和三维图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E5%9B%BE"><span class="nav-number">1.6.1.</span> <span class="nav-text">线图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E7%BB%98%E5%9B%BE"><span class="nav-number">1.6.2.</span> <span class="nav-text">三维绘图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE"><span class="nav-number">1.6.3.</span> <span class="nav-text">子图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%92%8C%E8%84%9A%E6%9C%AC"><span class="nav-number">1.7.</span> <span class="nav-text">编程和脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E8%A8%80"><span class="nav-number">1.7.1.</span> <span class="nav-text">基本语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%97%B6%E8%84%9A%E6%9C%AC"><span class="nav-number">1.7.2.</span> <span class="nav-text">实时脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.7.3.</span> <span class="nav-text">循环和条件语句</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">函数总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#magic-n"><span class="nav-number">2.1.</span> <span class="nav-text">magic(n)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inv"><span class="nav-number">2.2.</span> <span class="nav-text">inv()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clc"><span class="nav-number">2.3.</span> <span class="nav-text">clc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meshgrid-x-y"><span class="nav-number">2.4.</span> <span class="nav-text">meshgrid(x,y)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exp-x"><span class="nav-number">2.5.</span> <span class="nav-text">exp(x)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cylinder"><span class="nav-number">2.6.</span> <span class="nav-text">cylinder()</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="不对de林"
+      src="/images/glass.jpg">
+  <p class="site-author-name" itemprop="name">不对de林</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AkkaDuilin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AkkaDuilin" rel="noopener" target="_blank">GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/2075861530@qq.com" title="E-Mail → 2075861530@qq.com">E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/01/17/matlab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/glass.jpg">
+      <meta itemprop="name" content="不对de林">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼享乐，摸鱼快乐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          matlab笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-17 11:17:51 / 修改时间：14:07:00" itemprop="dateCreated datePublished" datetime="2022-01-17T11:17:51+08:00">2022-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2022/01/17/matlab/" class="post-meta-item leancloud_visitors" data-flag-title="matlab笔记" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2022/01/17/matlab/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/01/17/matlab/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a href="https://sm.ms/image/pstS2TFVXGEo71x" target="_blank"><img src="https://s2.loli.net/2022/01/17/pstS2TFVXGEo71x.jpg" ></a></p>
+<p><strong>前言</strong></p>
+<p>matlab笔记，备战美赛</p>
+<p>冲鸭！！！</p>
+<span id="more"></span>
+
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="矩阵和数组"><a href="#矩阵和数组" class="headerlink" title="矩阵和数组"></a>矩阵和数组</h2><p>所有 MATLAB 变量都是多维数组，与数据类型无关。矩阵是指通常用来进行线性代数运算的二维数组。</p>
+<h3 id="数组创建"><a href="#数组创建" class="headerlink" title="数组创建"></a>数组创建</h3><ol>
+<li>用空格或者逗号(,)分隔数据<br>a = [1 2 3 4]</li>
+<li>用分号;分隔多行数据<br>a = [1 3 5; 2 4 6; 7 8 10]</li>
+<li>创建矩阵的另一种方法是使用 ones、zeros 或 rand 等函数。<br>zeros全部为零</li>
+</ol>
+<p>ones全部为 1</p>
+<p>rand均匀分布的随机元素</p>
+<p>randn正态分布的随机元素</p>
+<p>z = zeros(5,1)</p>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><ol>
+<li><p>用单一运算符处理矩阵中的所有值<br><a href="https://sm.ms/image/uTdrzlhOf4jVIJq" target="_blank"><img src="https://s2.loli.net/2022/01/17/uTdrzlhOf4jVIJq.jpg" style="width:60%"></a></p>
+</li>
+<li><p>转置矩阵使用单引号<br>a’<br>撇号运算符（例如，A’）执行复共轭转置。它会围绕主对角线翻转矩阵，并且还会更改矩阵的任何复数元素的虚部符号。点撇号运算符 (A.’) 转置矩阵，但不会影响复数元素的符号。对于包含所有实数元素的矩阵，这两个运算符返回相同结果。</p>
+</li>
+<li><p>inv()<br>计算方阵x的逆矩阵</p>
+</li>
+<li><p>使用 * 执行矩阵乘法<br><a href="https://sm.ms/image/aZrP1lmifzCGKJM" target="_blank"><img src="https://s2.loli.net/2022/01/17/aZrP1lmifzCGKJM.jpg" style="width:60%" ></a></p>
+</li>
+<li><p>使用 format 命令可以显示更多小数位数<br>format long<br>format short</p>
+</li>
+<li><p>执行元素级乘法 .* 运算符<br>乘法、除法和幂的矩阵运算符分别具有执行元素级运算的对应数组运算符。</p>
+</li>
+<li><p>串联<br>连接数组以便形成更大数组的过程，成对的方括号 [] 即为串联运算符。<br><a href="https://sm.ms/image/QPu2vlSCEnIe15g" target="_blank"><img src="https://s2.loli.net/2022/01/17/QPu2vlSCEnIe15g.jpg" style="width:60%"></a></p>
+</li>
+<li><p>复数<br>表示虚部用 i j<br>c = [3+4i, 4+3j; -i, 10j]<br>c = 2×2 complex</p>
+<p>3.0000 + 4.0000i   4.0000 + 3.0000i<br>0.0000 - 1.0000i   0.0000 +10.0000i</p>
+</li>
+<li><p>sum()<br>S = sum(A) 返回 A 沿大小不等于 1 的第一个数组维度的元素之和。</p>
+</li>
+</ol>
+<p>如果 A 是向量，则 sum(A) 返回元素之和。</p>
+<p>如果 A 是矩阵，则 sum(A) 将返回包含每列总和的行向量。</p>
+<p>如果 A 是多维数组，则 sum(A) 沿大小不等于 1 的第一个数组维度计算，并将这些元素视为向量。此维度会变为 1，而所有其他维度的大小保持不变。</p>
+<p>S = sum(A,dim) 沿维度 dim 返回总和。例如，如果 A 为矩阵，则 sum(A,2) 是包含每一行总和的列向量。</p>
+<p>S = sum(A,’all’) 计算 A 的所有元素的总和。</p>
+<p>使用 sum 和 diag 函数可以获取主对角线上的元素的总和：</p>
+<p>sum(diag(A))</p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>A = 4×4</p>
+<pre><code> 1     2     3     4
+ 5     6     7     8
+ 9    10    11    12
+13    14    15    16
+</code></pre>
+<ol>
+<li><p>指定行和列下标<br>A(4,2)<br>ans = 14</p>
+</li>
+<li><p>单一下标按顺序向下遍历每一列<br>A(8)<br>ans = 14</p>
+</li>
+<li><p>要引用多个数组元素，请使用冒号运算符，这使您可以指定一个格式为 start:end 的范围<br>A(1:3,2)<br>ans = 3×1</p>
+<p>  2<br>  6<br> 10<br>单独的冒号（没有起始值或结束值）指定该维中的所有元素。<br>A(3,:)<br>ans = 1×5</p>
+<p>  9    10    11    12<br>冒号运算符还允许您使用较通用的格式 start:step:end 创建等间距向量值。默认步长为1<br>B = 0:10:100<br>B = 1×11</p>
+<p>  0    10    20    30    40    50    60    70    80    90   100</p>
+</li>
+<li><p>包含冒号的下标表达式引用部分矩阵：<br>A(1:k,j)<br>表示 A 第 j 列中的前 k 个元素。因此，<br>sum(A(1:4,4)) 计算第四列的总和。<br>但是，执行此计算有一种更好的方法。冒号本身引用矩阵行或列中的所有元素，而关键字 end 引用最后一个行或列。<br>sum(A(:,end))</p>
+</li>
+<li><p>删除行和列<br>只需使用一对方括号即可从矩阵中删除行和列。首先<br>X = A<br>然后，要删除 X 的第二列，请使用<br>X(:,2) = []<br>这会将 X 更改为<br>X =<br> 16     2    13<br>  5    11     8<br>  9     7    12<br>  4    14     1<br>如果您删除矩阵中的单个元素，结果将不再是矩阵。因此，以下类似表达式<br>X(1,2) = []<br>将会导致错误。<br>但是，使用单一下标可以删除一个元素或元素序列，并将其余元素重构为一个行向量。因此<br>X(2:2:10) = []<br>生成<br>X =<br> 16     9     2     7    13    12     1</p>
+</li>
+</ol>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>结构体是多维 MATLAB 数组，包含可按文本字段标志符访问的元素。例如，<br>S.name = ‘Ed Plum’;<br>S.score = 83;<br>S.grade = ‘B+’<br>创建一个具有三个字段的标量结构体：<br>S =<br>     name: ‘Ed Plum’<br>    score: 83<br>    grade: ‘B+’<br>与 MATLAB 环境中的所有其他内容一样，结构体也为数组，因此可以插入其他元素。在本示例中，数组的每个元素都是一个具有若干字段的结构体。可以一次添加一个字段，<br>S(2).name = ‘Toni Miller’;<br>S(2).score = 91;<br>S(2).grade = ‘A-‘;<br>也可以使用一个语句添加整个元素：<br>S(3) = struct(‘name’,’Jerry Garcia’,… ‘score’,70,’grade’,’C’)</p>
+<h2 id="工作区变量"><a href="#工作区变量" class="headerlink" title="工作区变量"></a>工作区变量</h2><p>使用<br>whos 查看工作区内容<br>save 保存数据 系统使用.mat拓展名将工作区保存在当前工作文件夹中一个名为 MAT 文件的压缩文件中<br>load 还原到工作区<br><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/learn_matlab/workspace.html">https://ww2.mathworks.cn/help/matlab/learn_matlab/workspace.html</a></p>
+<h2 id="字符串和文本"><a href="#字符串和文本" class="headerlink" title="字符串和文本"></a>字符串和文本</h2><p>处理文本时，将字符序列括在双引号中<br>strlength 函数求数组中每个字符串的长度<br>是个数组，每个元素包含单个字符<br><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/learn_matlab/character-strings.html">https://ww2.mathworks.cn/help/matlab/learn_matlab/character-strings.html</a></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>输入参数括在圆括号</p>
+<p>存在多个输入参数，请使用逗号加以分隔</p>
+<p>存在多个输出参数，请将其括在方括号中<br>[maxA,location] = max(A)<br>maxA = 5<br>location = 3</p>
+<p>字符输入括在单引号中</p>
+<p>有关初等数学函数的列表，请键入</p>
+<p>help elfun<br>有关更多高等数学函数和矩阵函数的列表，请键入</p>
+<p>help specfun<br>help elmat</p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="矩阵运算符"><a href="#矩阵运算符" class="headerlink" title="矩阵运算符"></a>矩阵运算符</h3><p>表达式使用大家熟悉的算术运算符和优先法则。</p>
+<ul>
+<li>加法</li>
+</ul>
+<ul>
+<li>减法</li>
+</ul>
+<ul>
+<li>乘法</li>
+</ul>
+<p>/ 除法</p>
+<p>\ 左除</p>
+<p>^ 幂</p>
+<p>‘ 复共轭转置</p>
+<p>( )指定计算顺序</p>
+<h3 id="数组运算符"><a href="#数组运算符" class="headerlink" title="数组运算符"></a>数组运算符</h3><p>如果矩阵不用于线性代数运算，则成为二维数值数组。数组的算术运算按元素执行。这意味着，加法和减法运算对数组和矩阵都是相同的，但乘法运算不相同。MATLAB 的乘法数组运算表示法中包含点，也就是小数点。</p>
+<p>运算符列表包括</p>
+<ul>
+<li>加法</li>
+</ul>
+<ul>
+<li>减法</li>
+</ul>
+<p>.* 逐元素乘法</p>
+<p>./ 逐元素除法</p>
+<p>.\ 逐元素左除</p>
+<p>.^ 逐元素幂</p>
+<p>.’ 非共轭数组转置</p>
+<h3 id="构建表"><a href="#构建表" class="headerlink" title="构建表"></a>构建表</h3><p>数组运算对构建表非常有用。假定 n 为列向量</p>
+<p>n = (0:9)’;<br>然后，</p>
+<p>pows = [n  n.^2  2.^n]<br>构建一个平方和 2 次幂的表：</p>
+<p>pows =<br>     0     0     1<br>     1     1     2<br>     2     4     4<br>     3     9     8<br>     4    16    16<br>     5    25    32<br>     6    36    64<br>     7    49   128<br>     8    64   256<br>     9    81   512</p>
+<h3 id="常用常量值"><a href="#常用常量值" class="headerlink" title="常用常量值"></a>常用常量值</h3><p>pi 3.14159265…</p>
+<p>i 虚数单位 </p>
+<p>j 与 i 相同</p>
+<p>eps 浮点相对精度 ε=2^−52</p>
+<p>realmin 最小浮点数 2^−1022</p>
+<p>realmax 最大浮点数 (2−ε)2^1023</p>
+<p>Inf 无穷</p>
+<p>NaN 非数字</p>
+<h2 id="二维图和三维图"><a href="#二维图和三维图" class="headerlink" title="二维图和三维图"></a>二维图和三维图</h2><p><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/learn_matlab/basic-plotting-functions.html#responsive_offcanvas">https://ww2.mathworks.cn/help/matlab/learn_matlab/basic-plotting-functions.html#responsive_offcanvas</a></p>
+<h3 id="线图"><a href="#线图" class="headerlink" title="线图"></a>线图</h3><p>要创建二维线图，请使用 plot 函数<br>plot(x,y,’r–’)</p>
+<p>x 数据范围<br>x = 0:pi/100:2*pi;<br><em>0到2pi，中间以pi/100为间距取点</em><br><em>x分别取0，pi/100,2pi/100,3pi/100…….2pi</em></p>
+<p>y 函数<br>y = sin(x);</p>
+<p>‘r–’ 线条设定。每个设定可包含表示线条颜色、样式和标记的字符。</p>
+<p>默认情况下，每次调用绘图函数、重置坐标区及其他元素以准备新绘图时，MATLAB® 都会清空图窗。</p>
+<p>要将绘图添加到现有图窗中，请使用 hold on。在使用 hold off 或关闭窗口之前，当前图窗窗口中会显示所有绘图。</p>
+<h3 id="三维绘图"><a href="#三维绘图" class="headerlink" title="三维绘图"></a>三维绘图</h3><p>surf(X,Y,Z)<br>z = f (x,y)<br>要计算 z，请首先使用 meshgrid 在此函数的域中创建一组 (x,y) 点。</p>
+<p>[X,Y] = meshgrid(-2:.2:2);<br><em>.2表示0.2 (-2:.2:2)表示在-2到2的区间上以0.2的长度为间隔的向量</em><br>Z = X .* exp(-X.^2 - Y.^2);<br>然后，创建曲面图。</p>
+<p>surf(X,Y,Z)<br>surf 函数及其伴随函数 mesh 以三维形式显示曲面图。surf 使用颜色显示曲面图的连接线和面。mesh 生成仅以颜色标记连接定义点的线条的线框曲面图。</p>
+<h3 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h3><p>subplot 函数可以在同一窗口的不同子区域显示多个绘图<br>subplot 的前两个输入表示每行和每列中的绘图数。第三个输入指定绘图是否处于活动状态。</p>
+<h2 id="编程和脚本"><a href="#编程和脚本" class="headerlink" title="编程和脚本"></a>编程和脚本</h2><h3 id="基本语言"><a href="#基本语言" class="headerlink" title="基本语言"></a>基本语言</h3><ol>
+<li><p>创建脚本<br>edit name</p>
+</li>
+<li><p>注释 %</p>
+</li>
+<li><p>运行脚本 输入当前脚本名称</p>
+</li>
+</ol>
+<h3 id="实时脚本"><a href="#实时脚本" class="headerlink" title="实时脚本"></a>实时脚本</h3><p>要使用 edit 命令创建新的实时脚本，请在文件名中包含 .mlx 扩展名：</p>
+<p>edit newfile.mlx</p>
+<h3 id="循环和条件语句"><a href="#循环和条件语句" class="headerlink" title="循环和条件语句"></a>循环和条件语句</h3><figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">N = 100;</span><br><span class="line">f(1) = 1;</span><br><span class="line">f(2) = 1;</span><br><span class="line">%循环%</span><br><span class="line">for n = 3:N</span><br><span class="line">    f(n) = f(n-1) + f(n-2);</span><br><span class="line">end</span><br><span class="line">f(1:10)</span><br><span class="line">%条件%</span><br><span class="line">num = randi(100)</span><br><span class="line">if num &lt; 34</span><br><span class="line">   sz = &#x27;low&#x27;</span><br><span class="line">elseif num &lt; 67</span><br><span class="line">   sz = &#x27;medium&#x27;</span><br><span class="line">else</span><br><span class="line">   sz = &#x27;high&#x27;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="函数总结"><a href="#函数总结" class="headerlink" title="函数总结"></a>函数总结</h1><h2 id="magic-n"><a href="#magic-n" class="headerlink" title="magic(n)"></a>magic(n)</h2><p>M = magic(n) 返回由 1 到 n2 的整数构成并且总行数和总列数相等的 n×n 矩阵。n 的阶数必须是大于或等于 3 的标量才能创建有效的幻方矩阵。</p>
+<h2 id="inv"><a href="#inv" class="headerlink" title="inv()"></a>inv()</h2><p>Y = inv(X) 计算方阵 X 的 逆矩阵。</p>
+<h2 id="clc"><a href="#clc" class="headerlink" title="clc"></a>clc</h2><p>clc 函数清空命令行窗口。</p>
+<h2 id="meshgrid-x-y"><a href="#meshgrid-x-y" class="headerlink" title="meshgrid(x,y)"></a>meshgrid(x,y)</h2><p>语法</p>
+<p>[X,Y] = meshgrid(x,y)<br>[X,Y] = meshgrid(x)<br>[X,Y,Z] = meshgrid(x,y,z)<br>[X,Y,Z] = meshgrid(x)</p>
+<p>说明<br>[X,Y] = meshgrid(x,y) 基于向量 x 和 y 中包含的坐标返回二维网格坐标。X 是一个矩阵，每一行是 x 的一个副本；Y 也是一个矩阵，每一列是 y 的一个副本。坐标 X 和 Y 表示的网格有 length(y) 个行和 length(x) 个列。</p>
+<p>[X,Y] = meshgrid(x) 与 [X,Y] = meshgrid(x,x) 相同，并返回网格大小为 length(x)×length(x) 的方形网格坐标。</p>
+<p>[X,Y,Z] = meshgrid(x,y,z) 返回由向量 x、y 和 z 定义的三维网格坐标。X、Y 和 Z 表示的网格的大小为 length(y)×length(x)×length(z)。</p>
+<p>[X,Y,Z] = meshgrid(x) 与 [X,Y,Z] = meshgrid(x,x,x) 相同，并返回网格大小为 length(x)×length(x)×length(x) 的三维网格坐标。</p>
+<h2 id="exp-x"><a href="#exp-x" class="headerlink" title="exp(x)"></a>exp(x)</h2><p>Y = exp(X) 为数组 X 中的每个元素返回指数 ex。 </p>
+<h2 id="cylinder"><a href="#cylinder" class="headerlink" title="cylinder()"></a>cylinder()</h2><p>创建圆柱<br>[X,Y,Z] = cylinder 返回三个 2×21 矩阵，其中包含圆柱的 x、y 和 z 坐标，但不对其绘图。圆柱的半径为 1，圆周上有 20 个等间距点。底面平行于 xy 平面。</p>
+<p>要绘制圆柱，请将 X、Y 和 Z 传递给 surf 或 mesh 函数。<br><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/cylinder.html?searchHighlight=cylinder&amp;s_tid=srchtitle_cylinder_1">https://ww2.mathworks.cn/help/matlab/ref/cylinder.html?searchHighlight=cylinder&amp;s_tid=srchtitle_cylinder_1</a></p>
+<hr />
+版权信息
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="不对de林 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="不对de林 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/matlab/" rel="tag"># matlab</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/08/%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="前中后缀表达式">
+                  <i class="fa fa-chevron-left"></i> 前中后缀表达式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/26/her/" rel="next" title="一些成长的故事">
+                  一些成长的故事 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">buduidelin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"f3jaiTbB3hO8V4eAFBA289EL-gzGzoHsz","app_key":"TDrINbch4z5S05NFEUOr1I0h","server_url":"https://akkaduilin.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvMNGOdF","appkey":"prod_03a32a91909e1f1959166b1199dbcf75"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+

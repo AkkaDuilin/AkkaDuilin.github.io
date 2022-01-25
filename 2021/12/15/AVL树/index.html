@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="前言 总结一下平衡二叉树 AVL树的一些用法和代码 引用文章：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;wasi-991017&#x2F;p&#x2F;13824039.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="平衡二叉树详解">
+<meta property="og:url" content="http://akkaduilin.com/2021/12/15/AVL%E6%A0%91/index.html">
+<meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
+<meta property="og:description" content="前言 总结一下平衡二叉树 AVL树的一些用法和代码 引用文章：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;wasi-991017&#x2F;p&#x2F;13824039.html">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2021/12/15/Ag1Owom6QxB5c2s.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/15/QKY3xkvubPqNjgJ.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/15/lZ15qnmcpzQ7uM4.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/15/nOhJW9jx7ARqTlu.jpg">
+<meta property="og:image" content="https://s2.loli.net/2021/12/15/Ag1Owom6QxB5c2s.jpg">
+<meta property="article:published_time" content="2021-12-15T09:12:03.000Z">
+<meta property="article:modified_time" content="2021-12-15T15:27:33.347Z">
+<meta property="article:author" content="不对de林">
+<meta property="article:tag" content="树">
+<meta property="article:tag" content="查找">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2021/12/15/Ag1Owom6QxB5c2s.jpg">
+
+
+<link rel="canonical" href="http://akkaduilin.com/2021/12/15/AVL%E6%A0%91/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2021/12/15/AVL%E6%A0%91/","path":"2021/12/15/AVL树/","title":"平衡二叉树详解"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>平衡二叉树详解 | 咸鱼享乐，摸鱼快乐</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="咸鱼享乐，摸鱼快乐" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">咸鱼享乐，摸鱼快乐</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E9%83%A8%E5%88%86-%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E8%B0%83%E6%95%B4%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">关键部分 ———— 调整方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LL%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">LL型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RR%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">RR型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">LR型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RL%E5%9E%8B"><span class="nav-number">2.4.</span> <span class="nav-text">RL型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">3.1.</span> <span class="nav-text">笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">完整代码</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="不对de林"
+      src="/images/glass.jpg">
+  <p class="site-author-name" itemprop="name">不对de林</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AkkaDuilin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AkkaDuilin" rel="noopener" target="_blank">GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/2075861530@qq.com" title="E-Mail → 2075861530@qq.com">E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2021/12/15/AVL%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/glass.jpg">
+      <meta itemprop="name" content="不对de林">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼享乐，摸鱼快乐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          平衡二叉树详解
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-15 17:12:03 / 修改时间：23:27:33" itemprop="dateCreated datePublished" datetime="2021-12-15T17:12:03+08:00">2021-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2021/12/15/AVL%E6%A0%91/" class="post-meta-item leancloud_visitors" data-flag-title="平衡二叉树详解" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2021/12/15/AVL%E6%A0%91/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/12/15/AVL树/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>前言</strong></p>
+<p>总结一下平衡二叉树 AVL树的一些用法和代码</p>
+<p>引用文章：<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wasi-991017/p/13824039.html">https://www.cnblogs.com/wasi-991017/p/13824039.html</a></p>
+<p><a href="https://sm.ms/image/Ag1Owom6QxB5c2s" target="_blank"><img src="https://s2.loli.net/2021/12/15/Ag1Owom6QxB5c2s.jpg" alt="RL.jpg"></a></p>
+<span id="more"></span>
+
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>平衡二叉树可以理解为是二叉排序树的优化版本，在二叉排序树的应用过程中会出现子树间深度差距大而导致查找性能下降的情况，所以就有了平衡二叉树这种优化方法。</p>
+<p>可以得出平衡二叉树的定义</p>
+<ol>
+<li><p>基于二叉排序树</p>
+</li>
+<li><p>左右子树的深度之差的绝对值不超过1</p>
+</li>
+<li><p>左右子树都是平衡二叉树</p>
+</li>
+</ol>
+<p>定义平衡因子为本根节点的 左子树深度 - 右子树深度</p>
+<h1 id="关键部分-————-调整方法"><a href="#关键部分-————-调整方法" class="headerlink" title="关键部分 ———— 调整方法"></a>关键部分 ———— 调整方法</h1><h2 id="LL型"><a href="#LL型" class="headerlink" title="LL型"></a>LL型</h2><p>左子树平衡因子 大于 右子树 且 左子树的左子树平衡因子 大于 左子树的右子树平衡因子 ——两个子树也可用<br><img src="https://s2.loli.net/2021/12/15/QKY3xkvubPqNjgJ.jpg" alt="" style="width:100%" /> </p>
+<h2 id="RR型"><a href="#RR型" class="headerlink" title="RR型"></a>RR型</h2><p>右子树平衡因子 大于 左子树 且 右子树的右子树平衡因子 大于 右子树的左子树——两个子树也可用<br><a href="https://sm.ms/image/lZ15qnmcpzQ7uM4" target="_blank"><img src="https://s2.loli.net/2021/12/15/lZ15qnmcpzQ7uM4.jpg" alt="RR.jpg"></a> </p>
+<h2 id="LR型"><a href="#LR型" class="headerlink" title="LR型"></a>LR型</h2><p>左子树平衡因子 大于 右子树 且 左子树的右子树平衡因子 大于 左子树的左子树<br><a href="https://sm.ms/image/nOhJW9jx7ARqTlu" target="_blank"><img src="https://s2.loli.net/2021/12/15/nOhJW9jx7ARqTlu.jpg" alt="LR.jpg"></a></p>
+<h2 id="RL型"><a href="#RL型" class="headerlink" title="RL型"></a>RL型</h2><p>右子树平衡因子 大于 左子树 且 右子树的左子树平衡因子 大于 右子树的右子树<br><a href="https://sm.ms/image/Ag1Owom6QxB5c2s" target="_blank"><img src="https://s2.loli.net/2021/12/15/Ag1Owom6QxB5c2s.jpg" alt="RL.jpg"></a></p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>转自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wasi-991017/p/13824039.html">https://www.cnblogs.com/wasi-991017/p/13824039.html</a></p>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>124 - 142 排序二叉树的插入操作 插入后做平衡操作者<br>209 - 230 平衡操作 判断情况并调用不同情况函数 LL RR LR RL<br>237 - 271 不同情况对应函数<br>注意旋转操作和插入操作都返回一个根节点(学习！！！)<br>eg：<br>subRoot-&gt;rChild = Insert(subRoot-&gt;rChild, k);</p>
+<p>BalanceFactor() 返回某结点的平衡因子</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br></pre></td><td class="code"><pre><span class="line">/*******平衡二叉树（AVL）***********/</span><br><span class="line">#pragma once</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">///平衡二叉树结点结构</span><br><span class="line">struct AVLNode &#123;</span><br><span class="line">	int data;</span><br><span class="line">	AVLNode *lChild, *rChild;</span><br><span class="line">	AVLNode(int a) &#123;</span><br><span class="line">		data = a;</span><br><span class="line">		lChild = NULL;</span><br><span class="line">		rChild = NULL;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class AVLTree &#123;</span><br><span class="line">public:</span><br><span class="line">	AVLTree() &#123;</span><br><span class="line">		root = NULL;</span><br><span class="line">	&#125;</span><br><span class="line">	~AVLTree() &#123;</span><br><span class="line">		destroy(root);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///从命令行接受数据创建AVL树。使用其他方式创建原理一致</span><br><span class="line">	void Create() &#123;</span><br><span class="line">		cout &lt;&lt; &quot;input numbers to create AVL: &quot; &lt;&lt; endl;</span><br><span class="line">		int temp;</span><br><span class="line">		while (cin &gt;&gt; temp) &#123;</span><br><span class="line">			root=Insert(root, temp);</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; &quot;AVL创建完成！&quot; &lt;&lt; endl;</span><br><span class="line">		Print();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///返回某结点为根节点的子树高度</span><br><span class="line">	int Height(AVLNode *p) &#123;</span><br><span class="line">		if (p == NULL)</span><br><span class="line">			return 0;</span><br><span class="line">		int i = Height(p-&gt;lChild);</span><br><span class="line">		int j = Height(p-&gt;rChild);</span><br><span class="line">		return i &gt; j ? i + 1 : j + 1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///输出该排序树</span><br><span class="line">	void Print() &#123;</span><br><span class="line">		cout &lt;&lt; &quot;中序遍历为： &quot;;</span><br><span class="line">		MidOrder(root);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; &quot;先序遍历为： &quot;;</span><br><span class="line">		PreOrder(root);</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///先序遍历输出</span><br><span class="line">	void PreOrder(AVLNode *p) &#123;</span><br><span class="line">		if (p != NULL) &#123;</span><br><span class="line">			cout &lt;&lt; p-&gt;data &lt;&lt; &quot; &quot;;</span><br><span class="line">			PreOrder(p-&gt;lChild);</span><br><span class="line">			PreOrder(p-&gt;rChild);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	///中序遍历输出</span><br><span class="line">	void MidOrder(AVLNode *p) &#123;</span><br><span class="line">		if (p != NULL) &#123;</span><br><span class="line">			MidOrder(p-&gt;lChild);</span><br><span class="line">			cout &lt;&lt; p-&gt;data &lt;&lt; &quot; &quot;;</span><br><span class="line">			MidOrder(p-&gt;rChild);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///简化版插入函数</span><br><span class="line">	void Insert(const int x) &#123;</span><br><span class="line">		root = Insert(root, x);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///简化版删除函数</span><br><span class="line">	void Remove(int x) &#123;</span><br><span class="line">		root=Remove(root, x);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///返回值为x的结点指针</span><br><span class="line">	AVLNode* Search(int x) &#123;</span><br><span class="line">		AVLNode *p = root;</span><br><span class="line">		while (p) &#123;</span><br><span class="line">			if (p-&gt;data == x)</span><br><span class="line">				break;</span><br><span class="line">			else if (p-&gt;data &lt; x)</span><br><span class="line">				p = p-&gt;rChild;</span><br><span class="line">			else</span><br><span class="line">				p = p-&gt;lChild;</span><br><span class="line">		&#125;</span><br><span class="line">		return p;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///返回子树最大值结点的指针</span><br><span class="line">	AVLNode* TreeMax(AVLNode* subTree) &#123;</span><br><span class="line">		if (!subTree)</span><br><span class="line">			return NULL;</span><br><span class="line">		while (subTree-&gt;rChild) &#123;</span><br><span class="line">			subTree = subTree-&gt;rChild;</span><br><span class="line">		&#125;</span><br><span class="line">		return subTree;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///返回子树最小值结点的指针</span><br><span class="line">	AVLNode* TreeMin(AVLNode* subTree) &#123;</span><br><span class="line">		if (!subTree)</span><br><span class="line">			return NULL;</span><br><span class="line">		while (subTree-&gt;lChild) &#123;</span><br><span class="line">			subTree = subTree-&gt;lChild;</span><br><span class="line">		&#125;</span><br><span class="line">		return subTree;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">	///根节点</span><br><span class="line">	AVLNode *root;</span><br><span class="line"></span><br><span class="line">	///插入（视为在某结点为根节点的子树上进行插入）</span><br><span class="line">	//对子树上进行插入操作后都需要平衡操作，可能会改变该子树的根节点，</span><br><span class="line">	//因此设置返回值记录完成操作后子树的根结点指针)</span><br><span class="line">	AVLNode* Insert(AVLNode* subRoot, const int k) &#123;</span><br><span class="line">		if (subRoot == NULL) &#123;</span><br><span class="line">			subRoot = new AVLNode(k);</span><br><span class="line">		&#125;</span><br><span class="line">		else if (k &gt; subRoot-&gt;data) //需要在右子树上插入新的结点</span><br><span class="line">		&#123;</span><br><span class="line">			subRoot-&gt;rChild = Insert(subRoot-&gt;rChild, k);</span><br><span class="line">			//在右子树上插入结点后可能导致不平衡，故需要对右子树进行平衡操作</span><br><span class="line">			//而平衡操作可能会导致子树根结点产生变化，故需更新当前的子树根节点</span><br><span class="line">			subRoot = Balancee(subRoot);</span><br><span class="line">		&#125;</span><br><span class="line">		else if (k &lt; subRoot-&gt;data) &#123; //需要在左子树上插入新的结点</span><br><span class="line">			subRoot-&gt;lChild = Insert(subRoot-&gt;lChild, k);</span><br><span class="line">			//和上面同理</span><br><span class="line">			subRoot = Balancee(subRoot);</span><br><span class="line">		&#125;</span><br><span class="line">		//将新的子树根结点指针返回供原父节点更新孩子指针</span><br><span class="line">		return subRoot;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///删除结点（视为在该结点为根节点的树上进行删除操作）</span><br><span class="line">	AVLNode* Remove(AVLNode* subRoot, int x) &#123;</span><br><span class="line">		if (!Search(x)) &#123;//不存在x的结点则直接返回</span><br><span class="line">			cout &lt;&lt; &quot;不存在值为&quot; &lt;&lt; x &lt;&lt; &quot;的结点！&quot; &lt;&lt; endl;</span><br><span class="line">			return root;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		if (!root)  //root为空指针都直接返回NULL</span><br><span class="line">			return root;</span><br><span class="line"></span><br><span class="line">		if (subRoot-&gt;data == x)  //情况1：要删除的就是该树的根节点</span><br><span class="line">		&#123;</span><br><span class="line">			if (subRoot-&gt;lChild &amp;&amp; subRoot-&gt;rChild)//情况1.1：该树的左右子树都存在</span><br><span class="line">			&#123;</span><br><span class="line">				if (BalanceFactor(subRoot)&gt;0) </span><br><span class="line">				&#123;</span><br><span class="line">					//左子树高于右子树，则根节点的值替换为其直接前驱的值，然后转化为删除</span><br><span class="line">					//其直接前驱(其位于左子树上，也就意味着去降低左子树高度)</span><br><span class="line">					AVLNode *tmp = TreeMax(subRoot-&gt;lChild); //直接前驱就是左子树的最大值</span><br><span class="line">					subRoot-&gt;data = tmp-&gt;data;</span><br><span class="line">					//递归调用Remove()删除subRoot的左子树上的前驱结点后，Remove()返回可能为</span><br><span class="line">					//新的subRoot的左子树根节点供subRoot更新左孩子结点((Remove()会调用Balance()函数平衡其操作的树))。</span><br><span class="line">					subRoot-&gt;lChild = Remove(subRoot-&gt;lChild, tmp-&gt;data);</span><br><span class="line">				&#125;</span><br><span class="line">				else &#123;</span><br><span class="line">					//右子树高于左子树，则根节点的值替换为其直接后继的值，</span><br><span class="line">					//然后转化为删除其直接后继(其位于右子树上，也就意味着去降低右子树高度)</span><br><span class="line">					AVLNode *tmp = TreeMin(subRoot-&gt;rChild);</span><br><span class="line">					subRoot-&gt;data = tmp-&gt;data;</span><br><span class="line">					subRoot-&gt;rChild = Remove(subRoot-&gt;rChild, tmp-&gt;data);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			else //情况1.2：只存在一颗子树或者都不存在</span><br><span class="line">			&#123;</span><br><span class="line">				//直接将根节点更新为其孩子结点(都不存在则为NULL)</span><br><span class="line">				AVLNode * tmp = subRoot;</span><br><span class="line">				subRoot = (subRoot-&gt;lChild) ? (subRoot-&gt;lChild) : (subRoot-&gt;rChild);</span><br><span class="line">				delete tmp;</span><br><span class="line">				tmp = NULL;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		else if (x &lt; subRoot-&gt;data) &#123; //情况2：要删除的节点位于左子树上</span><br><span class="line">			//递归调用,在subRoot的左子树上进行删除操作，并返回新的左子树根节点供subRoot更新左孩子指针</span><br><span class="line">			subRoot-&gt;lChild = Remove(subRoot-&gt;lChild, x);</span><br><span class="line">			//在subRoot的左子树上完成删除操作后,可能导致该树不平衡,故需要进行平衡操作并更新当前根节点</span><br><span class="line">			if (BalanceFactor(subRoot) &lt; -1)</span><br><span class="line">				subRoot = Balancee(root);</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;//情况3：要删除的节点位于右子树上</span><br><span class="line">			//递归调用,在subRoot的右子树上进行删除操作，并返回新的右子树根节点供subRoot更新右孩子指针</span><br><span class="line">			subRoot-&gt;rChild = Remove(subRoot-&gt;rChild, x);</span><br><span class="line">			//在subRoot的右子树上完成删除操作后,可能导致该树不平衡,故需要进行平衡操作并更新当前根节点</span><br><span class="line">			if (BalanceFactor(subRoot) &gt;1)</span><br><span class="line">				subRoot = Balancee(subRoot);</span><br><span class="line">		&#125;</span><br><span class="line">		//返回该树当前根节点供其父节点更新孩子节点</span><br><span class="line">		return subRoot;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///返回某个节点的平衡因子</span><br><span class="line">	int BalanceFactor(AVLNode *p) &#123;</span><br><span class="line">		return Height(p-&gt;lChild) - Height(p-&gt;rChild);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///对某个结点进行平衡操作（根据平衡因子调用四种不同的旋转操作）</span><br><span class="line">	AVLNode* Balancee(AVLNode* subRoot) &#123;</span><br><span class="line">		int bf = BalanceFactor(subRoot);</span><br><span class="line">		if (bf &gt; 1) //左子树更高</span><br><span class="line">		&#123;</span><br><span class="line">			if (BalanceFactor(subRoot-&gt;lChild) &gt; 0)</span><br><span class="line">				//左孩子结点平衡因子&gt;0说明新节点多在了左子树上，因此调用LL_Rotation</span><br><span class="line">				subRoot = LL_Rotation(subRoot);</span><br><span class="line">			else</span><br><span class="line">				//左孩子结点平衡因子&lt;0说明新节点多在了右子树上，因此调用LR_Rotation</span><br><span class="line">				subRoot = LR_Rotation(subRoot);</span><br><span class="line">		&#125;</span><br><span class="line">		else if (bf &lt; -1) //右子树更高</span><br><span class="line">		&#123;</span><br><span class="line">			if (BalanceFactor(subRoot-&gt;rChild) &gt; 0)</span><br><span class="line">		        //右孩子结点平衡因子&gt;0说明新节点多在了左子树上，因此调用RL_Rotation</span><br><span class="line">				subRoot = RL_Rotation(subRoot);</span><br><span class="line">			else</span><br><span class="line">			    //右孩子结点平衡因子&lt;0说明新节点多在了右子树上上，因此调用RR_Rotation</span><br><span class="line">				subRoot = RR_Rotation(subRoot);</span><br><span class="line">		&#125;</span><br><span class="line">		//对分支结点进行平衡操作后可能会更新该分支节点，故将新的分支结点返回供原父结点更新孩子指针</span><br><span class="line">		return subRoot;</span><br><span class="line">	&#125;</span><br><span class="line">	/*****************************</span><br><span class="line">	          四种旋转操作</span><br><span class="line">	******************************/</span><br><span class="line">	/// LL平衡旋转(右单旋转)</span><br><span class="line">	//在左孩子(L)的左子树(L)上插入导致不平衡，需要向右旋转一次实现平衡</span><br><span class="line">	AVLNode* LL_Rotation(AVLNode *subRoot) &#123;</span><br><span class="line">		AVLNode* temp = subRoot-&gt;lChild;</span><br><span class="line">		subRoot-&gt;lChild = temp-&gt;rChild;</span><br><span class="line">		temp-&gt;rChild = subRoot;</span><br><span class="line">		//完成旋转操作之后，该处分支结点(原为subRoot)发生了变化，</span><br><span class="line">		//因此要返回新的分支节点指针供其父节点更新孩子指针</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line">	/// RR平衡旋转(左单旋转)</span><br><span class="line">	//在右孩子(R)的右子树(R)上插入导致不平衡，需要向左旋转一次实现平衡</span><br><span class="line">	AVLNode* RR_Rotation(AVLNode *subRoot) &#123;</span><br><span class="line">		AVLNode* temp = subRoot-&gt;rChild;</span><br><span class="line">		subRoot-&gt;rChild = temp-&gt;lChild;</span><br><span class="line">		temp-&gt;lChild = subRoot;</span><br><span class="line">		//完成旋转操作之后，该处分支结点(原为subRoot)发生了变化，</span><br><span class="line">		//因此要返回新的分支节点指针供其父节点更新孩子指针</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line">	/***********下面两种情况可看作是对根节点和子节点进行上两种旋转操作的组合*****************/</span><br><span class="line">	/// RL平衡旋转(先右后左双旋转)</span><br><span class="line">	//在右孩子(R)的左子树(L)上插入导致不平衡，需要先对分支结点的右孩子进行一次右旋(LL_Rotation),</span><br><span class="line">	//再对分支结点进行一次左旋(RR_Rotation)</span><br><span class="line">	AVLNode* RL_Rotation(AVLNode *subRoot) &#123;</span><br><span class="line">		//对subRoot右孩子结点LL旋转后，更新subRoot右结点指针</span><br><span class="line">		subRoot-&gt;rChild=LL_Rotation(subRoot-&gt;rChild);  </span><br><span class="line">		return RR_Rotation(subRoot);//返回新的分支结点供原分支节点的父节点更新孩子指针</span><br><span class="line">	&#125;</span><br><span class="line">	/// LR平衡旋转(先左后右双旋转)</span><br><span class="line">	//在左孩子(L)的右子树(R)上插入导致不平衡,需要先对分支结点的左孩子进行一次左旋(RR_Rotation),</span><br><span class="line">	//再对分支结点进行一次右旋(LL_Rotation)</span><br><span class="line">	AVLNode* LR_Rotation(AVLNode *subRoot) &#123;</span><br><span class="line">		//对subRoot左结点RR旋转后，更新subRoot左结点指针</span><br><span class="line">		subRoot-&gt; lChild = RR_Rotation(subRoot-&gt;lChild);  </span><br><span class="line">		return LL_Rotation(subRoot);//返回新的分支结点供原分支节点的父节点更新孩子指针</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	///销毁该树</span><br><span class="line">	void destroy(AVLNode* p) &#123;</span><br><span class="line">		if (p) &#123;</span><br><span class="line">			destroy(p-&gt;lChild);</span><br><span class="line">			destroy(p-&gt;rChild);</span><br><span class="line">			delete p;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr />
+版权信息
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="不对de林 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="不对de林 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%A0%91/" rel="tag"># 树</a>
+              <a href="/tags/%E6%9F%A5%E6%89%BE/" rel="tag"># 查找</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/13/Bitree/" rel="prev" title="树相关知识集合">
+                  <i class="fa fa-chevron-left"></i> 树相关知识集合
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/22/%E5%9B%BE%E7%9A%84%E7%9B%B8%E5%85%B3/" rel="next" title="图的相关基础知识">
+                  图的相关基础知识 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">buduidelin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"f3jaiTbB3hO8V4eAFBA289EL-gzGzoHsz","app_key":"TDrINbch4z5S05NFEUOr1I0h","server_url":"https://akkaduilin.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvMNGOdF","appkey":"prod_03a32a91909e1f1959166b1199dbcf75"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
