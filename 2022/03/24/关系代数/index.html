@@ -22,31 +22,41 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="前言 栈的应用，四则运算表达式求值">
+<meta name="description" content="前言 数据库笔记 ——  关系代数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前中后缀表达式">
-<meta property="og:url" content="http://akkaduilin.com/2022/01/08/%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:title" content="关系代数">
+<meta property="og:url" content="http://akkaduilin.com/2022/03/24/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/index.html">
 <meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
-<meta property="og:description" content="前言 栈的应用，四则运算表达式求值">
+<meta property="og:description" content="前言 数据库笔记 ——  关系代数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https:///">
-<meta property="article:published_time" content="2022-01-07T16:08:41.000Z">
-<meta property="article:modified_time" content="2022-01-08T03:52:55.608Z">
+<meta property="og:image" content="https://s2.loli.net/2022/03/24/6TerPQDAohzCOqf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/24/fmZdWqKQ8Peuo6k.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/24/GuvKOoS2LVZQ8RF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/24/P5sA9udivbH7YRZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/25/DxoWVwcfCKZEYRm.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/25/HUV3amCqj2ngelx.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/03/28/buEwmhMo6UJ7yN1.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/03/23/NfL7kYnJmTgaA53.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/26/JXj2BdQ31NFn4SE.png">
+<meta property="article:published_time" content="2022-03-24T13:34:27.000Z">
+<meta property="article:modified_time" content="2022-03-28T03:07:47.830Z">
 <meta property="article:author" content="不对de林">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="栈">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="关系代数">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:///">
 
 
-<link rel="canonical" href="http://akkaduilin.com/2022/01/08/%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+<link rel="canonical" href="http://akkaduilin.com/2022/03/24/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/01/08/%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/","path":"2022/01/08/前中后缀表达式/","title":"前中后缀表达式"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/03/24/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/","path":"2022/03/24/关系代数/","title":"关系代数"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>前中后缀表达式 | 咸鱼享乐，摸鱼快乐</title>
+<title>关系代数 | 咸鱼享乐，摸鱼快乐</title>
   
 
 
@@ -125,7 +135,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C"><span class="nav-number">1.</span> <span class="nav-text">后缀表达式计算结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">中缀表达式转后缀表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xx3x"><span class="nav-number">3.</span> <span class="nav-text">xx3x</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">关系代数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">传统运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9"><span class="nav-number">1.2.</span> <span class="nav-text">选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%95%E5%BD%B1"><span class="nav-number">1.3.</span> <span class="nav-text">投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.4.</span> <span class="nav-text">连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%A4%E8%BF%90%E7%AE%97"><span class="nav-number">1.5.</span> <span class="nav-text">除运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B1%A1%E9%9B%86"><span class="nav-number">1.5.1.</span> <span class="nav-text">象集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4%E8%BF%90%E7%AE%97-1"><span class="nav-number">1.5.2.</span> <span class="nav-text">除运算</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -201,7 +211,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/01/08/%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/03/24/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/glass.jpg">
@@ -214,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          前中后缀表达式
+          关系代数
         </h1>
 
         <div class="post-meta-container">
@@ -224,26 +234,32 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-01-08 00:08:41 / 修改时间：11:52:55" itemprop="dateCreated datePublished" datetime="2022-01-08T00:08:41+08:00">2022-01-08</time>
+      <time title="创建时间：2022-03-24 21:34:27" itemprop="dateCreated datePublished" datetime="2022-03-24T21:34:27+08:00">2022-03-24</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-03-28 11:07:47" itemprop="dateModified" datetime="2022-03-28T11:07:47+08:00">2022-03-28</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
         </span>
     </span>
 
   
-    <span id="/2022/01/08/%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="前中后缀表达式" title="阅读次数">
+    <span id="/2022/03/24/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/" class="post-meta-item leancloud_visitors" data-flag-title="关系代数" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -259,8 +275,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2022/01/08/%E5%89%8D%E4%B8%AD%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/01/08/前中后缀表达式/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2022/03/24/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/03/24/关系代数/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -278,90 +294,42 @@
         <img src="https://" alt="" style="width:100%" />  
 
 <p><strong>前言</strong></p>
-<p>栈的应用，四则运算表达式求值</p>
+<p>数据库笔记 ——  关系代数</p>
 <span id="more"></span>
 
-<h1 id="后缀表达式计算结果"><a href="#后缀表达式计算结果" class="headerlink" title="后缀表达式计算结果"></a>后缀表达式计算结果</h1><p>遍历每个数字和符号，遇到数字就进栈，遇到符号，将处于栈顶的两个数字出栈，运算后将结果进栈，直到得到最终结果</p>
-<p>例：<br>   后缀表达式为：9 3 1 - 3 * + 10 2 / +</p>
-<p>   规则为：从左到右遍历表达式的每个数字和符号，遇到是数字就进栈，遇到是符号，就将处于栈顶两个数字出栈，进行运算，运算结果进栈，一直到最终获得结果。</p>
-<p>   a.初始化一个空栈。此栈用来对要运算的数字进行进出使用。</p>
-<p>   b.后缀表达式中前三个是、都是数字，所以9 3 1 进栈。</p>
-<p>   c.接下来是“-”，所以将栈中的1出栈作为减数，3出栈作为被减数，并运算3-1得到2，再讲2进栈。</p>
-<p>   d.接着是数字3进栈。</p>
-<p>   e.后面是“*”，也就意味着栈中3和2出栈，2与3相乘，得到6，并将6进栈。</p>
-<p>   f.下面是“+”，所以栈中6和9出栈，9和6相加，得到15，将15进栈。</p>
-<p>   g.接着是10和2两数字进栈。</p>
-<p>   h.接下来是符号“/”，因此，栈顶的2与10出栈，10与2相除，得到5，将5进栈。</p>
-<p>   i.最后一个是符号“+”，所以15与5出栈并相加，得到20，讲20进栈。</p>
-<p>   j.结果是20出栈，栈变为空。</p>
-<h1 id="中缀表达式转后缀表达式"><a href="#中缀表达式转后缀表达式" class="headerlink" title="中缀表达式转后缀表达式"></a>中缀表达式转后缀表达式</h1><p>遍历每个数字和符号，遇到数字就输出，若是符号则判断其与栈顶符号的优先级。是右括号或优先级不高于栈顶符号的则将栈顶元素依次出栈并输出，之后将当前符号进栈，直到得到最终结果</p>
-<p>例：<br>　　以中缀表达式“9+（（3*2）+（3-1））/2”的转化为例介绍栈s1和栈s2的情况：</p>
-<p>　　注：数字和符号的顺序是按在栈中的顺序排列的。</p>
-<p>　　（1）遍历到字符“9”时：</p>
-<p>　　　　栈s1：9 ；</p>
-<p>　　　　栈s2：空 ；</p>
-<p>　　（1）遍历到符号“+”时：</p>
-<p>　　　　栈s1：9 ；</p>
-<p>　　　　栈s2：+ ；</p>
-<p>　　（1）遍历到符号“(”时：</p>
-<p>　　　　栈s1：9 ；</p>
-<p>　　　　栈s2：( + ；</p>
-<p>　　（2）遍历到符号“(”时：</p>
-<p>　　　　栈s1：9 ；</p>
-<p>　　　　栈s2：( ( + ；</p>
-<p>　　（3）遍历到字符“3”时：</p>
-<p>　　　　栈s1：3 9 ；</p>
-<p>　　　　栈s2：( ( +；</p>
-<p>　　（4）遍历到符号“*”时：</p>
-<p>　　　　栈s1：3 9 ；</p>
-<p>　　　　栈s2：* ( ( + ；</p>
-<p>　　（5）遍历到字符“2”时：</p>
-<p>　　　　栈s1：2 3 9 ；</p>
-<p>　　　　栈s2：* ( ( + ；</p>
-<p>　　（6）遍历到符号“)”时：</p>
-<p>　　　　栈s1：2 3 9 ；</p>
-<p>　　　　栈s2：* ( ( + ；</p>
-<p>　　　　此时开始比较，比较之后：</p>
-<p>　　　　栈s1：* 2 3 9 ；</p>
-<p>　　　　栈s2：( + ；</p>
-<p>　　（7）遍历到符号“+”时：</p>
-<p>　　　　栈s1：* 2 3 9 ；</p>
-<p>　　　　栈s2：+ ( +；</p>
-<p>　　（8）遍历到符号“(”时：</p>
-<p>　　　　栈s1：* 2 3 9 ；</p>
-<p>　　　　栈s2：( + ( + ；</p>
-<p>　　（9）遍历到字符“3”时：</p>
-<p>　　　　栈s1：3 * 2 3 9 ；</p>
-<p>　　　　栈s2：( + ( + ；</p>
-<p>　　（10）遍历到符号“-”时：</p>
-<p>　　　　栈s1：3 * 2 3 9 ；</p>
-<p>　　　　栈s2：- ( + ( + ；</p>
-<p>　　（11）遍历到字符“1”时：</p>
-<p>　　　　栈s1：1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：- ( + ( + ；</p>
-<p>　　（12）遍历到符号“)”时：</p>
-<p>　　　　栈s1：1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：- ( + ( + ；</p>
-<p>　　　　此时开始比较，比较之后：</p>
-<p>　　　　栈s1：- 1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：+ ( +；</p>
-<p>　　（13）遍历到符号“)”时：</p>
-<p>　　　　栈s1：- 1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：+ ( +；</p>
-<p>　　　　此时开始比较，比较之后：</p>
-<p>　　　　栈s1：+ - 1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：+；</p>
-<p>　　（14）遍历到符号“/”时：</p>
-<p>　　　　栈s1：+ - 1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：/ + ；</p>
-<p>　　（15）遍历到字符“2”时：</p>
-<p>　　　　栈s1：2 + - 1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：/ + ；</p>
-<p>　　（16）遍历结束，但栈s2中还有符号，所以将栈s2中的符号全部依次压入栈s1中，此时：</p>
-<p>　　　　栈s1：+ / 2 + - 1 3 * 2 3 9 ；</p>
-<p>　　　　栈s2：空；</p>
-<p>　　　所以后缀表达式为：9 3 2 * 3 1 - + 2 / + ；</p>
-<h1 id="xx3x"><a href="#xx3x" class="headerlink" title="xx3x"></a>xx3x</h1><hr />
+<h1 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h1><p><a href="https://sm.ms/image/6TerPQDAohzCOqf" target="_blank"><img src="https://s2.loli.net/2022/03/24/6TerPQDAohzCOqf.png" ></a></p>
+<h2 id="传统运算"><a href="#传统运算" class="headerlink" title="传统运算"></a>传统运算</h2><ol>
+<li><p>并：假设有两个关系 R1 和 R2,R1 和 R2 的并运算产生一个新关系 R3。R3 是 由属于关系 R1 或 R2 的所有不同元组所组成，记为 R3=R1∪R2。 </p>
+</li>
+<li><p>差：假设有两个关系 R1 和 R2，R1 和 R2 的差运算产生一个新关系 R3。R3 是由属于关系关系 R1，但不属于 R2 的元组组成，记为 R3=R1-R2。 </p>
+</li>
+<li><p>交：假设有两个关系 R1 和 R2，R1 和 R2 的交运算产生一个新关系 R3。R3 是由既属于关系 R1，同时又属于 R2 的元组组成，记为 R3=R1∩R2。</p>
+</li>
+<li><p>笛卡尔积：假设有两个关系 R1 和 R2，且 R1 为 m 元关系，R2 为 n 元关系， R1 和 R2 的笛卡尔积产生一个新关系 R3，记作 R3=R1✖R2。R3 是由 R1 和 R2 的所有元组连接而成的具有(m+n)个分量的元组组成。</p>
+</li>
+</ol>
+<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>关系代数中用符号 σ（西格玛，sigma）来描述选择语句。选择是根据某些条件对关系做水平切割<br>此外我们可以在 select 的同时，添加限制条件（即 where），使用例如下：</p>
+<p><a href="https://sm.ms/image/fmZdWqKQ8Peuo6k" target="_blank"><img src="https://s2.loli.net/2022/03/24/fmZdWqKQ8Peuo6k.png" ></a></p>
+<p>等价与</p>
+<figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where AGE=19;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h2><p>投影与选择正好相反，是对关系的一种垂直切割</p>
+<p>在关系代数中的投影语句相当于 SQL 中的字段筛选，可以选择特定的字段进行查询，格式如下：<br><a href="https://sm.ms/image/GuvKOoS2LVZQ8RF" target="_blank"><img src="https://s2.loli.net/2022/03/24/GuvKOoS2LVZQ8RF.png" ></a></p>
+<figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select sno, age, sname from student;</span><br></pre></td></tr></table></figure>
+
+<p>当选择和投影连用时<br>可以和where联动 相当于一个完整的selec语句<br><a href="https://sm.ms/image/P5sA9udivbH7YRZ" target="_blank"><img src="https://s2.loli.net/2022/03/24/P5sA9udivbH7YRZ.png" ></a><br>select sname from student where AGE=19;</p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p><a href="https://sm.ms/image/DxoWVwcfCKZEYRm" target="_blank"><img src="https://s2.loli.net/2022/03/25/DxoWVwcfCKZEYRm.png" ></a><br>连接运算：从两个关系的笛卡尔积中选取属性间满足一定条件的元组，用(R ⋈ S）表示。<br>连接分为两种，<br>一种是等值连接(θ 为 = 关系)<br>另一种是自然连接 根据R与S共同的属性进行选择 结果中去掉重复属性列 自然联接是特殊的的等值联接</p>
+<p><a href="https://sm.ms/image/HUV3amCqj2ngelx" target="_blank"><img src="https://s2.loli.net/2022/03/25/HUV3amCqj2ngelx.jpg" ></a></p>
+<p>自然连接时，被舍弃的元组称为<strong>悬浮元组</strong>，如果将悬浮元组也保存在结果中，在其他属性保持空值，称为<strong>外连接</strong>，只保留左边R中的悬浮元组称为<strong>左外连接</strong>，只保留右边S中的悬浮元组称为<strong>右外连接</strong></p>
+<p><a href="https://sm.ms/image/buEwmhMo6UJ7yN1" target="_blank"><img src="https://s2.loli.net/2022/03/28/buEwmhMo6UJ7yN1.jpg" ></a></p>
+<h2 id="除运算"><a href="#除运算" class="headerlink" title="除运算"></a>除运算</h2><p><a href="https://sm.ms/image/NfL7kYnJmTgaA53" target="_blank"><img src="https://s2.loli.net/2022/03/23/NfL7kYnJmTgaA53.png" ></a></p>
+<h3 id="象集"><a href="#象集" class="headerlink" title="象集"></a>象集</h3><p>象集：本质上是一次选择行的运算和一次选择列的运算。<br>求x1在表A中的象集，就是先选出所有x属性中x=x1的那些行，然后选择出不包含x1的那些列。</p>
+<p>如A：<br>X     Y     Z<br>a1    b1    c2<br>a2    b3    c7<br>a3    b4    c6<br>a1    b2    c3<br>a4    b6    c6<br>a2    b2    c3<br>a1    b2    c1<br>a1在A中的象集为{(b1,c2),(b2,c3),(b2,c1)}</p>
+<h3 id="除运算-1"><a href="#除运算-1" class="headerlink" title="除运算"></a>除运算</h3><p>设关系R除以关系S的结果为关系T，则T包含所有在R但是不在S中的属性及其值，且T的元组与S的元组的所有集合都在R中</p>
+<p>R与S的除运算构成新的关系P(X),P是R中满足下列条件的元组在X属性列上的投影，元组在X上分量值x的象集Yx包含S在Y上投影的集合。</p>
+<p><a href="https://sm.ms/image/JXj2BdQ31NFn4SE" target="_blank"><img src="https://s2.loli.net/2022/03/26/JXj2BdQ31NFn4SE.png" ></a></p>
+<hr />
 版权信息
     </div>
 
@@ -389,22 +357,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C++</a>
-              <a href="/tags/%E6%A0%88/" rel="tag"># 栈</a>
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/" rel="tag"># 关系代数</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/01/07/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="prev" title="字符串">
-                  <i class="fa fa-chevron-left"></i> 字符串
+                <a href="/2022/03/23/SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" rel="prev" title="SQL数据查询">
+                  <i class="fa fa-chevron-left"></i> SQL数据查询
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/01/17/matlab/" rel="next" title="matlab笔记">
-                  matlab笔记 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
