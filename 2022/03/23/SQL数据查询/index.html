@@ -31,9 +31,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https:///">
 <meta property="og:image" content="https://s2.loli.net/2022/03/24/dJUMtu5DN2VwaYr.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/30/KJqzfrO1AQtiM9u.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/03/30/UVIQPu9qDElgR6o.jpg">
 <meta property="article:published_time" content="2022-03-23T01:59:50.000Z">
-<meta property="article:modified_time" content="2022-03-30T03:56:47.962Z">
+<meta property="article:modified_time" content="2022-04-08T08:48:42.372Z">
 <meta property="article:author" content="不对de林">
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="数据库">
@@ -143,13 +144,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -235,7 +236,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2022-03-30 11:56:47" itemprop="dateModified" datetime="2022-03-30T11:56:47+08:00">2022-03-30</time>
+        <time title="修改时间：2022-04-08 16:48:42" itemprop="dateModified" datetime="2022-04-08T16:48:42+08:00">2022-04-08</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -363,7 +364,8 @@
 <h2 id="笛卡儿积和连接"><a href="#笛卡儿积和连接" class="headerlink" title="笛卡儿积和连接"></a>笛卡儿积和连接</h2><p>SQL 在一个查询中建立几个表的联系的方法非常简单，只要在 FROM 子句中列出所有<br>涉及到的表就可以了。从概念上讲，FROM 子句先对这些表做笛卡尔积操作，得到一个临<br>时表，以后的选择、投影等操作都是针对这个临时表，从而将多表查询转换为单表查询。</p>
 <p>一般格式为</p>
 <p><strong>[&lt;表名 1&gt;.]&lt;列名 1&gt; &lt;比较运算符&gt; [&lt;表名 2&gt;.]&lt;列名 2&gt;</strong></p>
-<h2 id="join-子句"><a href="#join-子句" class="headerlink" title="join 子句"></a>join 子句</h2><h3 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h3><p>在非 ANSI 标准的实现中，连接是在 WHERE 子句中执行的（即在 WHERE 子句中指定表间的连接条件）；在 ANSI SQL-92 中，连接是在 JOIN 子句中执行的。前者称为Theta 连接，后者称为 ANSI 连接。</p>
+<h2 id="join-子句"><a href="#join-子句" class="headerlink" title="join 子句"></a>join 子句</h2><p><a href="https://sm.ms/image/KJqzfrO1AQtiM9u" target="_blank"><img src="https://s2.loli.net/2022/03/30/KJqzfrO1AQtiM9u.jpg" ></a></p>
+<h3 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h3><p>在非 ANSI 标准的实现中，连接是在 WHERE 子句中执行的（即在 WHERE 子句中指定表间的连接条件）；在 ANSI SQL-92 中，连接是在 JOIN 子句中执行的。前者称为Theta 连接，后者称为 ANSI 连接。</p>
 <p>ANSI 内连接的语法格式：<br>FROM 表 1 [INNER] JOIN 表 2 ON &lt;连接条件&gt;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">eg ：列出曲库中所有演唱过歌曲的歌手名，歌曲名和发行量。</span><br><span class="line"></span><br><span class="line">Theta 方式的 SQL 语句：</span><br><span class="line">SELECT Songs.Name AS 歌曲名, Singers.Name AS 歌手名,Circulation AS 发行量</span><br><span class="line">FROM Songs,Track,Singers</span><br><span class="line">WHERE Songs.SongID=Track.SongID AND Track.SingerID=Singers.SingerID</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ANSI 方式的 SQL 语句为：</span><br><span class="line">SELECT Songs.Name AS 歌曲名, Singers.Name AS 歌手名,Circulation AS 发行量</span><br><span class="line">FROM Songs JOIN Track ON Songs.SongID=Track.SongID</span><br><span class="line">JOIN Singers ON Track.SingerID=Singers.SingerID</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
