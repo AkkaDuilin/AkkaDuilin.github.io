@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -407,8 +407,8 @@
 <a href="/2022/03/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%8C%E6%95%B4%E6%80%A7/" title="数据库完整性">数据库完整性</a>
 
 
-<h1 id="索引的建立"><a href="#索引的建立" class="headerlink" title="索引的建立"></a>索引的建立</h1><h1 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h1><a href="#">Post not found: SQL数据查询</a>
-<a href="#">Post not found: SQL数据查询 SQL数据查询</a>
+<h1 id="索引的建立"><a href="#索引的建立" class="headerlink" title="索引的建立"></a>索引的建立</h1><h1 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h1><a href="/2022/03/23/SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" title="SQL数据查询">SQL数据查询</a>
+<a href="/2022/03/23/SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" title="SQL数据查询">SQL数据查询</a>
 
 <h1 id="数据更新"><a href="#数据更新" class="headerlink" title="数据更新"></a>数据更新</h1><h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><p>元组插入语句的一般格式：<br>INSERT INTO &lt;表名&gt; ( &lt;列名 1&gt; [ , &lt;列名 2&gt;] …)<br>VALUES (&lt;常量 1&gt; [, &lt;常量 2&gt; ]…)<br>或者<br>INSERT INTO &lt;表名&gt; ( &lt;列名 1&gt; [ , &lt;列名 2&gt;] …)<br>&lt;子查询&gt;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">假设另有一张歌手表 S，表结构与 Singer 一致，现在要求把 S 表中所有没有在</span><br><span class="line">Singer 表里出现过的男歌星加入到 Singer 表中。</span><br><span class="line"></span><br><span class="line">INSERT INTO Singers (SingerID, Name, Gender, Nation, Birth)</span><br><span class="line">(</span><br><span class="line">  SELECT (SingerID, Name, Gender, Nation, Birth)</span><br><span class="line">  FROM S</span><br><span class="line">  WHERE S.Gender=’男’ and NOT EXISTS (S.SingerID=Singers.SingerID)</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
