@@ -22,37 +22,44 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/public/search.xml","localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="前言 编译原理笔记 编译程序的组成及概念解释">
+<meta name="description" content="前言 编译原理语法分析和自动机笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编译原理基础概念">
-<meta property="og:url" content="http://akkaduilin.com/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:title" content="自动机基础">
+<meta property="og:url" content="http://akkaduilin.com/2022/03/10/%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
-<meta property="og:description" content="前言 编译原理笔记 编译程序的组成及概念解释">
+<meta property="og:description" content="前言 编译原理语法分析和自动机笔记">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/03/01/KEVZuPkjTrQ2UYa.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/03/01/PDkWqNwRTOKUV9M.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/03/01/LG9S8uT7lUOkjDi.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/03/01/yqvLdF9N1MsflIT.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/03/01/mLJdAs1lEK3IGeS.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/03/01/etIwzx8q5EZs3gu.jpg">
-<meta property="og:image" content="https://s2.loli.net/2022/03/01/6qEwzlsM79CA1ki.jpg">
-<meta property="article:published_time" content="2022-03-01T09:29:16.000Z">
-<meta property="article:modified_time" content="2022-03-01T15:00:48.837Z">
+<meta property="og:image" content="https:///">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/uPWla5wI7JXTDYb.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/gv2d78rL1SQahHc.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/Cwu4Y2OULmiG1IJ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/QKDBcj7fCsMP59F.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/GJVDSbQnlEvoU34.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/b2lZOW4RVk5xnBi.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/gQ5wBUqhaXrbkiR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/11/S2cYgyePsK37BFZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/11/jl8qX65Q9fFSWDN.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/11/oszIn5VJFXSbWRv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/11/dakmJMfp6csuWOS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/11/f7G4CmQtKMcugVn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/11/cCKnjfMRz7u9bUy.png">
+<meta property="article:published_time" content="2022-03-10T08:00:34.000Z">
+<meta property="article:modified_time" content="2022-04-11T08:38:07.678Z">
 <meta property="article:author" content="不对de林">
 <meta property="article:tag" content="编译原理">
 <meta property="article:tag" content="概念">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/03/01/KEVZuPkjTrQ2UYa.jpg">
+<meta name="twitter:image" content="https:///">
 
 
-<link rel="canonical" href="http://akkaduilin.com/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
+<link rel="canonical" href="http://akkaduilin.com/2022/03/10/%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%9F%BA%E7%A1%80/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/","path":"2022/03/01/编译原理基础概念/","title":"编译原理基础概念"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/03/10/%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%9F%BA%E7%A1%80/","path":"2022/03/10/自动机基础/","title":"自动机基础"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>编译原理基础概念 | 咸鱼享乐，摸鱼快乐</title>
+<title>自动机基础 | 咸鱼享乐，摸鱼快乐</title>
   
 
 
@@ -158,7 +165,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">语言处理系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">翻译器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E9%83%A8%E5%88%86-%E5%89%8D%E7%AB%AF%E9%98%B6%E6%AE%B5%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.2.</span> <span class="nav-text">分析部分(前端阶段任务)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E9%83%A8%E5%88%86-%E5%90%8E%E7%AB%AF%E9%98%B6%E6%AE%B5%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.3.</span> <span class="nav-text">综合部分(后端阶段任务)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">解释器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E7%BC%96%E8%AF%91%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">混合编译器</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">有限自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE"><span class="nav-number">2.1.</span> <span class="nav-text">状态转换图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%A1%AE%E5%AE%9A%E7%9A%84%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88NFA%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">不确定的有限自动机（NFA）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E7%9A%84%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88DFA%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">确定的有限自动机（DFA）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%B0NFA"><span class="nav-number">3.</span> <span class="nav-text">从正则表达式到NFA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E8%AF%86%E5%88%AB%E7%A9%BA%E5%92%8C%E5%AD%97%E6%AF%8D%E8%A1%A8%E4%B8%AD%E4%B8%80%E4%B8%AA%E7%AC%A6%E5%8F%B7%E7%9A%84NFA"><span class="nav-number">3.1.</span> <span class="nav-text">构造识别空和字母表中一个符号的NFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E8%AF%86%E5%88%AB%E4%B8%BB%E7%AE%97%E7%AC%A6%E4%B8%BA%E9%80%89%E6%8B%A9%E6%AD%A3%E5%88%99%E5%BC%8F%E7%9A%84NFA"><span class="nav-number">3.2.</span> <span class="nav-text">构造识别主算符为选择正则式的NFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%A0%E8%AF%86%E5%88%AB%E4%B8%BB%E7%AE%97%E7%AC%A6%E4%B8%BA%E9%97%AD%E5%8C%85%E6%AD%A3%E5%88%99%E5%BC%8F%E7%9A%84NFA"><span class="nav-number">3.3.</span> <span class="nav-text">造识别主算符为闭包正则式的NFA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8ENFA%E5%88%B0DFA"><span class="nav-number">4.</span> <span class="nav-text">从NFA到DFA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DFA%E6%9C%80%E7%AE%80%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">DFA最简化</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,7 +241,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/03/10/%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/glass.jpg">
@@ -247,7 +254,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          编译原理基础概念
+          自动机基础
         </h1>
 
         <div class="post-meta-container">
@@ -257,26 +264,32 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-03-01 17:29:16 / 修改时间：23:00:48" itemprop="dateCreated datePublished" datetime="2022-03-01T17:29:16+08:00">2022-03-01</time>
+      <time title="创建时间：2022-03-10 16:00:34" itemprop="dateCreated datePublished" datetime="2022-03-10T16:00:34+08:00">2022-03-10</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-04-11 16:38:07" itemprop="dateModified" datetime="2022-04-11T16:38:07+08:00">2022-04-11</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">编译原理</span></a>
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
+          <a href="/categories/%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
         </span>
     </span>
 
   
-    <span id="/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="post-meta-item leancloud_visitors" data-flag-title="编译原理基础概念" title="阅读次数">
+    <span id="/2022/03/10/%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="post-meta-item leancloud_visitors" data-flag-title="自动机基础" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -292,8 +305,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/03/01/编译原理基础概念/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2022/03/10/%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%9F%BA%E7%A1%80/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/03/10/自动机基础/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -308,44 +321,48 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><strong>前言</strong></p>
-<p><strong>编译原理笔记</strong></p>
-<p>编译程序的组成及概念解释</p>
-<p><a href="https://sm.ms/image/KEVZuPkjTrQ2UYa" target="_blank"><img src="https://s2.loli.net/2022/03/01/KEVZuPkjTrQ2UYa.jpg"  style="width:60%"></a></p>
-<span id="more"></span>
+        <img src="https://" alt="" style="width:100%" />  
 
-<h1 id="语言处理系统"><a href="#语言处理系统" class="headerlink" title="语言处理系统"></a>语言处理系统</h1><p><a href="https://sm.ms/image/PDkWqNwRTOKUV9M" target="_blank"><img src="https://s2.loli.net/2022/03/01/PDkWqNwRTOKUV9M.jpg" style="width:60%"></a></p>
-<h1 id="翻译器"><a href="#翻译器" class="headerlink" title="翻译器"></a>翻译器</h1><p>翻译器是能够完成从一种语言到另一种语言变换的软件</p>
-<p><a href="https://sm.ms/image/LG9S8uT7lUOkjDi" target="_blank"><img src="https://s2.loli.net/2022/03/01/LG9S8uT7lUOkjDi.jpg" style="width:60%"></a></p>
-<h1 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h1><p>编译器是指将<strong>源程序</strong>编译为目标<strong>可执行程序</strong>的系统</p>
-<p>编译器的前端与后端<br>前端：只依赖于源语言<br>后端：依赖于目标机器，一般独立于源语言，与中间语言有关<br>前端+后端：组合<br>取一个编译器前端，重写它的后端以产生同一源语言在另一机器上的编译器<br>把几种不同的语言编译成同一种中间语言，让不同的前端使用同一后端，从而得到一台机器上的几个编译器<br>编译的几个阶段常用一趟/遍（pass）扫描来实现，一趟/遍扫描包括读一个输入文件和写一个输出文件</p>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><a href="https://sm.ms/image/yqvLdF9N1MsflIT" target="_blank"><img src="https://s2.loli.net/2022/03/01/yqvLdF9N1MsflIT.jpg" style="width:60%"></a></p>
-<h2 id="分析部分-前端阶段任务"><a href="#分析部分-前端阶段任务" class="headerlink" title="分析部分(前端阶段任务)"></a>分析部分(前端阶段任务)</h2><p>前端：源程序 → 中间表示</p>
-<ol>
-<li><p><strong>词法分析</strong><br><a href="https://sm.ms/image/mLJdAs1lEK3IGeS" target="_blank"><img src="https://s2.loli.net/2022/03/01/mLJdAs1lEK3IGeS.jpg" style="width:60%"></a><br>识别最小语法单位并表示词性<br>逐个读构成源程序的字符，把它们组成词法单元(token)流</p>
-</li>
-<li><p><strong>语法分析</strong><br><a href="https://sm.ms/image/etIwzx8q5EZs3gu" target="_blank"><img src="https://s2.loli.net/2022/03/01/etIwzx8q5EZs3gu.jpg" style="width:60%"></a><br>根据单词词性分析语法<br>把词法记号流依照语言的语法结构按层次分组，以形成语法短语</p>
-</li>
-<li><p><strong>语义分析</strong><br>根据单词值分析语义是否正确<br>· 类型转换<br>· 类型检查<br>· 语法制导翻译</p>
-</li>
-<li><p><strong>中间代码生成</strong><br>生成中间代码<br>中间代码位于<strong>高级编程语言</strong>和<strong>机器语言</strong>（目标程序）之间</p>
-</li>
+<p><strong>前言</strong></p>
+<p>编译原理语法分析和自动机笔记</p>
+<span id="more"></span>
+<h1 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h1><ol>
+<li>词法记号：由记号名和属性值构成的二元组，属性值不是必须项，记号名是语法分析的输入符号。</li>
+<li>模式：一个记号的模式描述属于该记号的词法单元的形式。和一个给定模式匹配的字（字符串）的集合成为该模式的语言。</li>
+<li>词法单元：是源程序中匹配一个记号模式的字符序列，由词法分析器识别为该记号的一个实例。<br><a href="https://sm.ms/image/uPWla5wI7JXTDYb" target="_blank"><img src="https://s2.loli.net/2022/04/10/uPWla5wI7JXTDYb.png" ></a></li>
 </ol>
-<h2 id="综合部分-后端阶段任务"><a href="#综合部分-后端阶段任务" class="headerlink" title="综合部分(后端阶段任务)"></a>综合部分(后端阶段任务)</h2><p>后端：中间表示 → 目标程序</p>
-<ol>
-<li><p><strong>代码优化</strong><br>对中间代码进行优化，以期产生更高效的目标代码。</p>
-</li>
-<li><p><strong>目标程序生成</strong><br>将中间代码转换成低级语言代码、机器代码或汇编码。</p>
-</li>
-<li><p><strong>符号表管理</strong><br>编译器的一项重要工作是记录源程序中使用的标识符，并收集每个标识符的各种属性。<br>符号表是为每个标识符保存一个记录的数据结构，记录的域是标识符的属性。</p>
-</li>
-<li><p><strong>出错管理</strong><br>每个阶段都可能发现源程序的错误。发现错误后，该阶段必须处理此错误，使得编译可以继续进行，以便进一步发现源程序的其他错误。</p>
-</li>
+<h1 id="有限自动机"><a href="#有限自动机" class="headerlink" title="有限自动机"></a>有限自动机</h1><p>词法单元的识别<br><a href="https://sm.ms/image/gv2d78rL1SQahHc" target="_blank"><img src="https://s2.loli.net/2022/04/10/gv2d78rL1SQahHc.png" ></a></p>
+<h2 id="状态转换图"><a href="#状态转换图" class="headerlink" title="状态转换图"></a>状态转换图</h2><ol>
+<li>圆圈表示状态，开始状态由一条没有出发节点、标号为“开始”的边指明</li>
+<li>双层圆圈表示接受状态，表示已识别一个记号</li>
+<li>有向边表示从一个状态到另一状态</li>
+<li>每条边的标号包含一个或多个符号，若离开状态s的某边上标号为other，则它表示离开s的其他边所指示的字符以外的任意字符</li>
+<li>*表示输入指针必须回退的转态</li>
 </ol>
-<h1 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h1><p>百度百科：<br>解释器（英语：Interpreter），又译为直译器，是一种电脑程序，能够把高级编程语言一行一行直接转译运行。解释器不会一次把整个程序转译出来，只像一位“中间人”，每次运行程序时都要先转成另一种语言再作运行，因此解释器的程序运行速度比较缓慢。它每转译一行程序叙述就立刻运行，然后再转译下一行，再运行，如此不停地进行下去。</p>
-<p>编译器与解释器区别：</p>
-<p>解释器不像编译器通过翻译来生成目标程序，而是直接执行源程序所指定的运算。</p>
-<h1 id="混合编译器"><a href="#混合编译器" class="headerlink" title="混合编译器"></a>混合编译器</h1><p><a href="https://sm.ms/image/6qEwzlsM79CA1ki" target="_blank"><img src="https://s2.loli.net/2022/03/01/6qEwzlsM79CA1ki.jpg" style="width:60%"></a></p>
+<p><a href="https://sm.ms/image/Cwu4Y2OULmiG1IJ" target="_blank"><img src="https://s2.loli.net/2022/04/10/Cwu4Y2OULmiG1IJ.png" ></a></p>
+<p>使用*installNum()*来获取要返回的记号名和属性</p>
+<h2 id="不确定的有限自动机（NFA）"><a href="#不确定的有限自动机（NFA）" class="headerlink" title="不确定的有限自动机（NFA）"></a>不确定的有限自动机（NFA）</h2><p><em>不确定的含义是存在这样的状态，对于某个输入符号，存在不止一种的转换</em></p>
+<p><a href="https://sm.ms/image/QKDBcj7fCsMP59F" target="_blank"><img src="https://s2.loli.net/2022/04/10/QKDBcj7fCsMP59F.png" ></a></p>
+<p><strong>手工构造NFA</strong><br><a href="https://sm.ms/image/GJVDSbQnlEvoU34" target="_blank"><img src="https://s2.loli.net/2022/04/10/GJVDSbQnlEvoU34.png" ></a></p>
+<p><strong>转换表表示在NFA输入是a时，状态i所能到达的状态集合。</strong></p>
+<h2 id="确定的有限自动机（DFA）"><a href="#确定的有限自动机（DFA）" class="headerlink" title="确定的有限自动机（DFA）"></a>确定的有限自动机（DFA）</h2><p>是不确定自动机的特殊情况</p>
+<ol>
+<li>任何状态不存在空转换</li>
+<li>对任何状态s和输入符号a，最多只有一条标记为a的边离开s，即转换函数move最多只有一个，并且可以是不分函数</li>
+<li>如果用转换表来表示DFA，表中每个条目最多只有一个状态。</li>
+</ol>
+<p><a href="https://sm.ms/image/b2lZOW4RVk5xnBi" target="_blank"><img src="https://s2.loli.net/2022/04/10/b2lZOW4RVk5xnBi.png" ></a></p>
+<p><a href="https://sm.ms/image/gQ5wBUqhaXrbkiR" target="_blank"><img src="https://s2.loli.net/2022/04/10/gQ5wBUqhaXrbkiR.png" ></a></p>
+<h1 id="从正则表达式到NFA"><a href="#从正则表达式到NFA" class="headerlink" title="从正则表达式到NFA"></a>从正则表达式到NFA</h1><p><strong>MYT算法构造NFA</strong></p>
+<h2 id="构造识别空和字母表中一个符号的NFA"><a href="#构造识别空和字母表中一个符号的NFA" class="headerlink" title="构造识别空和字母表中一个符号的NFA"></a>构造识别空和字母表中一个符号的NFA</h2><p><a href="https://sm.ms/image/S2cYgyePsK37BFZ" target="_blank"><img src="https://s2.loli.net/2022/04/11/S2cYgyePsK37BFZ.png" ></a></p>
+<h2 id="构造识别主算符为选择正则式的NFA"><a href="#构造识别主算符为选择正则式的NFA" class="headerlink" title="构造识别主算符为选择正则式的NFA"></a>构造识别主算符为选择正则式的NFA</h2><p><a href="https://sm.ms/image/jl8qX65Q9fFSWDN" target="_blank"><img src="https://s2.loli.net/2022/04/11/jl8qX65Q9fFSWDN.png" ></a></p>
+<h2 id="造识别主算符为闭包正则式的NFA"><a href="#造识别主算符为闭包正则式的NFA" class="headerlink" title="造识别主算符为闭包正则式的NFA"></a>造识别主算符为闭包正则式的NFA</h2><p><a href="https://sm.ms/image/oszIn5VJFXSbWRv" target="_blank"><img src="https://s2.loli.net/2022/04/11/oszIn5VJFXSbWRv.png" ></a></p>
+<h1 id="从NFA到DFA"><a href="#从NFA到DFA" class="headerlink" title="从NFA到DFA"></a>从NFA到DFA</h1><p><strong>子集构造法</strong></p>
+<p>从第一个状态集合{0} 开始，寻找通过对应的的输入符号所达到的新的状态集合</p>
+<p><a href="https://sm.ms/image/dakmJMfp6csuWOS" target="_blank"><img src="https://s2.loli.net/2022/04/11/dakmJMfp6csuWOS.png" ></a></p>
+<p><a href="https://sm.ms/image/f7G4CmQtKMcugVn" target="_blank"><img src="https://s2.loli.net/2022/04/11/f7G4CmQtKMcugVn.png" ></a></p>
+<h1 id="DFA最简化"><a href="#DFA最简化" class="headerlink" title="DFA最简化"></a>DFA最简化</h1><p>D＇的开始状态是包含了D的开始状态的组的代表<br>D＇的接受状态是包含了D的接受状态的组的代表<br>如果D＇有死状态，则删除它<br>从开始状态不可达的状态也删除<br>从任何其他状态到死状态的转换都改成无定义</p>
+<p>例：<br>为正则表达式(a|b)*a(a|b)(a|b)构造NFA。并将NFA转换为DFA<br><a href="https://sm.ms/image/cCKnjfMRz7u9bUy" target="_blank"><img src="https://s2.loli.net/2022/04/11/cCKnjfMRz7u9bUy.png" ></a></p>
 <hr />
 版权信息
     </div>
@@ -382,13 +399,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/02/21/java-note/" rel="prev" title="Java 学习笔记(基础篇)">
-                  <i class="fa fa-chevron-left"></i> Java 学习笔记(基础篇)
+                <a href="/2022/03/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%8C%E6%95%B4%E6%80%A7/" rel="prev" title="数据库完整性">
+                  <i class="fa fa-chevron-left"></i> 数据库完整性
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/03/07/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="next" title="Java面向对象">
-                  Java面向对象 <i class="fa fa-chevron-right"></i>
+                <a href="/2022/03/23/SQL%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/" rel="next" title="SQL数据查询">
+                  SQL数据查询 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
