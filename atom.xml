@@ -277,6 +277,35 @@
   </entry>
   
   <entry>
+    <title>Java文件操作ava 流(Stream)、文件(File)和IO</title>
+    <link href="http://akkaduilin.com/2022/02/22/Java-io/"/>
+    <id>http://akkaduilin.com/2022/02/22/Java-io/</id>
+    <published>2022-02-22T09:19:12.000Z</published>
+    <updated>2022-04-15T08:26:06.913Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://" alt="" style="width:100%" />  <p><strong>前言</strong></p><p>Java.io 包几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。</p><p>Java.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。</p><p>一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。</p><p>Java 为 I/O 提供了强大的而灵活的支持，使其更广泛地应用到文件传输和网络编程中。</p><span id="more"></span><h1 id="读取控制台"><a href="#读取控制台" class="headerlink" title="读取控制台"></a>读取控制台</h1><h2 id="读取输入"><a href="#读取输入" class="headerlink" title="读取输入"></a>读取输入</h2><p>Java 的控制台输入由 System.in 完成<br>可以封装在一个BufferedReader中<br>BufferedReader类从字符输入流中读取文本并缓冲字符，以便有效地读取字符，数组和行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">c = (char) br.read();</span><br><span class="line">System.out.println(c);</span><br><span class="line"></span><br><span class="line">str = br.readLine();</span><br><span class="line">System.out.println(str);</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>使用 read() 方法从控制台读取一个字符，用 readLine() 方法读取一个字符串。</p><h2 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h2><p>控制台的输出由 print( ) 和 println() 完成,print()输出完毕后不换行，而println()输出完毕后会换行，<br>方法都由类 PrintStream 定义，System.out 是该类对象的一个引用。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int b;</span><br><span class="line">b = &#x27;A&#x27;;</span><br><span class="line">System.out.println(b);</span><br><span class="line">System.out.println(&#x27;\n&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h1><h2 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h2><p>创建一个文件对象来创建一个输入流对象读取文件。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File f = new File(&quot;C:/java/hello&quot;);</span><br><span class="line">InputStream in = new FileInputStream(f);</span><br></pre></td></tr></table></figure><p>相关函数<br>|  序号 | 方法 | 描述 |<br>|:—–|:—–|:—–|<br>|     1  |    close()   |  关闭此文件输入流并释放与此流有关的所有系统资源     |<br>|     2  |    write(int r)   |  从 InputStream 对象读取指定字节的数据。返回为整数值，返回下一字节数据，如果已经到结尾则返回-1。     |<br>|     3  |    write(byte[] r)    |  从输入流读取r.length长度的字节。返回读取的字节数。如果是文件结尾则返回-1。     |</p><h2 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h2><p>创建一个文件并向文件中写数据。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OutputStream f = new FileOutputStream(&quot;C:/java/hello&quot;)</span><br></pre></td></tr></table></figure><p>相关函数<br>|  序号 | 方法 | 描述 |<br>|:—–|:—–|:—–|<br>|     1  |    close()   |  关闭此文件输入流并释放与此流有关的所有系统资源     |<br>|     2  |    write(int w)   |  写入指定字节的数据。 |<br>|     3  |    write(byte[] w)    |  写入w.length长度的字节。     |</p><h1 id="xx3x"><a href="#xx3x" class="headerlink" title="xx3x"></a>xx3x</h1><hr />版权信息]]></content>
+    
+    
+    <summary type="html">&lt;img src=&quot;https://&quot; alt=&quot;&quot; style=&quot;width:100%&quot; /&gt;  
+
+&lt;p&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Java.io 包几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。&lt;/p&gt;
+&lt;p&gt;Java.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。&lt;/p&gt;
+&lt;p&gt;一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。&lt;/p&gt;
+&lt;p&gt;Java 为 I/O 提供了强大的而灵活的支持，使其更广泛地应用到文件传输和网络编程中。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="编程" scheme="http://akkaduilin.com/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="笔记" scheme="http://akkaduilin.com/categories/%E7%BC%96%E7%A8%8B/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Java" scheme="http://akkaduilin.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java 学习笔记(基础篇)</title>
     <link href="http://akkaduilin.com/2022/02/21/java-note/"/>
     <id>http://akkaduilin.com/2022/02/21/java-note/</id>
@@ -546,33 +575,6 @@
     <category term="DFS" scheme="http://akkaduilin.com/tags/DFS/"/>
     
     <category term="图论" scheme="http://akkaduilin.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>骑士周游问题</title>
-    <link href="http://akkaduilin.com/2021/12/22/%E9%AA%91%E5%A3%AB%E5%91%A8%E6%B8%B8%E9%97%AE%E9%A2%98/"/>
-    <id>http://akkaduilin.com/2021/12/22/%E9%AA%91%E5%A3%AB%E5%91%A8%E6%B8%B8%E9%97%AE%E9%A2%98/</id>
-    <published>2021-12-21T17:24:29.000Z</published>
-    <updated>2022-03-01T14:59:54.909Z</updated>
-    
-    <content type="html"><![CDATA[<img src="https://" alt="" style="width:100%" />  <p><strong>前言</strong><br><a href="https://sm.ms/image/QhmFXdajT5IULBN" target="_blank"><img src="https://s2.loli.net/2021/12/25/QhmFXdajT5IULBN.jpg" style="width:50%"></a><br>骑士周游问题 马踏棋盘问题题解<br>还未优化！！</p><span id="more"></span><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在一个棋盘上，一个棋子“马”（骑士），按照“马走日”的规则，从一个格子出发，走遍所有棋盘格恰好一次，一个这样的走棋序列称为一次“周游”。利用图的搜索算法，给出一个周游序列。</p><h1 id="方法解读"><a href="#方法解读" class="headerlink" title="方法解读"></a>方法解读</h1><p>递归深搜+回溯解决<br>可以使用贪心减少算法时间</p><p>参考博客:<br><a href="https://blog.csdn.net/u011718609/article/details/60873403">https://blog.csdn.net/u011718609/article/details/60873403</a><br><a href="https://www.cnblogs.com/Bone-ACE/p/4531306.html">https://www.cnblogs.com/Bone-ACE/p/4531306.html</a></p><h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int MaxSize = 5;</span><br><span class="line"></span><br><span class="line"> int step_arr[8][2] = &#123;</span><br><span class="line">   &#123;-1,2&#125;,&#123;1,2&#125;,&#123;2,1&#125;,&#123;2,-1&#125;,&#123;1,-2&#125;,&#123;-1,-2&#125;,&#123;-2,-1&#125;,&#123;-2,1&#125;</span><br><span class="line">   &#125;;</span><br><span class="line"> </span><br><span class="line">//可移动的八个方向</span><br><span class="line">int ans_arr[5][5] = &#123;0&#125;;</span><br><span class="line"></span><br><span class="line">void Dfs(int x, int y, int count,int step[5][5],int * flag)&#123;</span><br><span class="line"></span><br><span class="line">    if(*flag)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;    </span><br><span class="line">    if(count&gt;=25)&#123;</span><br><span class="line">        *flag = 1;</span><br><span class="line">        for(int i=0;i&lt;MaxSize;i++)&#123;</span><br><span class="line">            for(int j=0;j&lt;MaxSize;j++)&#123;</span><br><span class="line">                ans_arr[i][j] = step[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(x&gt;=0&amp;&amp;x&lt;MaxSize&amp;&amp;y&gt;=0&amp;&amp;y&lt;MaxSize&amp;&amp;step[x][y]==0)&#123;  </span><br><span class="line">        count++;</span><br><span class="line">        step[x][y]=count;</span><br><span class="line">        for(int i=0;i&lt;8;i++)&#123;   </span><br><span class="line">            Dfs(x+step_arr[i][0],y+step_arr[i][1],count,step,flag);  </span><br><span class="line">        &#125;</span><br><span class="line">        step[x][y]=0;//回溯***</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line"></span><br><span class="line">    int step[5][5] = &#123;0&#125;;</span><br><span class="line">    int x, y,flag = 0;</span><br><span class="line">    Dfs(0,2,0,step,&amp;flag);</span><br><span class="line">    for(int i=0;i&lt;MaxSize;i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;MaxSize;j++)&#123;</span><br><span class="line">            cout &lt;&lt; ans_arr[i][j] &lt;&lt; &#x27; &#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><hr />版权信息]]></content>
-    
-    
-    <summary type="html">&lt;img src=&quot;https://&quot; alt=&quot;&quot; style=&quot;width:100%&quot; /&gt;  
-
-&lt;p&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;br&gt;&lt;a href=&quot;https://sm.ms/image/QhmFXdajT5IULBN&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://s2.loli.net/2021/12/25/QhmFXdajT5IULBN.jpg&quot; style=&quot;width:50%&quot;&gt;&lt;/a&gt;&lt;br&gt;骑士周游问题 马踏棋盘问题题解&lt;br&gt;还未优化！！&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="题解" scheme="http://akkaduilin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-    
-    <category term="C++" scheme="http://akkaduilin.com/tags/C/"/>
-    
-    <category term="DFS" scheme="http://akkaduilin.com/tags/DFS/"/>
-    
-    <category term="动态规划" scheme="http://akkaduilin.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   

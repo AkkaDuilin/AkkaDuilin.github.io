@@ -22,33 +22,30 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/public/search.xml","localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="前言 总结一下拓扑排序相关的知识点和代码">
+<meta name="description" content="前言 Java.io 包几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。 Java.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。 一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。 Java 为 I&#x2F;O 提供了强大的而灵活的支持，使其更广泛地应用到文件传输和网络编程中。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="拓扑排序">
-<meta property="og:url" content="http://akkaduilin.com/2021/12/22/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="Java文件操作ava 流(Stream)、文件(File)和IO">
+<meta property="og:url" content="http://akkaduilin.com/2022/02/22/Java-io/index.html">
 <meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
-<meta property="og:description" content="前言 总结一下拓扑排序相关的知识点和代码">
+<meta property="og:description" content="前言 Java.io 包几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。 Java.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。 一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。 Java 为 I&#x2F;O 提供了强大的而灵活的支持，使其更广泛地应用到文件传输和网络编程中。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https:///">
-<meta property="og:image" content="https://s2.loli.net/2021/12/28/9cDbKx6CoEXuWkF.jpg">
-<meta property="article:published_time" content="2021-12-21T17:20:11.000Z">
-<meta property="article:modified_time" content="2022-01-08T03:52:30.321Z">
+<meta property="article:published_time" content="2022-02-22T09:19:12.000Z">
+<meta property="article:modified_time" content="2022-04-15T08:26:06.913Z">
 <meta property="article:author" content="不对de林">
-<meta property="article:tag" content="图论">
-<meta property="article:tag" content="排序">
-<meta property="article:tag" content="AOV">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:///">
 
 
-<link rel="canonical" href="http://akkaduilin.com/2021/12/22/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">
+<link rel="canonical" href="http://akkaduilin.com/2022/02/22/Java-io/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2021/12/22/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/","path":"2021/12/22/拓扑排序/","title":"拓扑排序"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/02/22/Java-io/","path":"2022/02/22/Java-io/","title":"Java文件操作ava 流(Stream)、文件(File)和IO"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>拓扑排序 | 咸鱼享乐，摸鱼快乐</title>
+<title>Java文件操作ava 流(Stream)、文件(File)和IO | 咸鱼享乐，摸鱼快乐</title>
   
 
 
@@ -154,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">代码解读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">完整代码实现</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">1.</span> <span class="nav-text">读取控制台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">读取输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA"><span class="nav-number">1.2.</span> <span class="nav-text">控制台输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">读写文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FileInputStream"><span class="nav-number">2.1.</span> <span class="nav-text">FileInputStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileOutputStream"><span class="nav-number">2.2.</span> <span class="nav-text">FileOutputStream</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xx3x"><span class="nav-number">3.</span> <span class="nav-text">xx3x</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -230,7 +227,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2021/12/22/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/02/22/Java-io/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/glass.jpg">
@@ -243,7 +240,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          拓扑排序
+          Java文件操作ava 流(Stream)、文件(File)和IO
         </h1>
 
         <div class="post-meta-container">
@@ -254,14 +251,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-12-22 01:20:11" itemprop="dateCreated datePublished" datetime="2021-12-22T01:20:11+08:00">2021-12-22</time>
+      <time title="创建时间：2022-02-22 17:19:12" itemprop="dateCreated datePublished" datetime="2022-02-22T17:19:12+08:00">2022-02-22</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2022-01-08 11:52:30" itemprop="dateModified" datetime="2022-01-08T11:52:30+08:00">2022-01-08</time>
+        <time title="修改时间：2022-04-15 16:26:06" itemprop="dateModified" datetime="2022-04-15T16:26:06+08:00">2022-04-15</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,12 +270,12 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+          <a href="/categories/%E7%BC%96%E7%A8%8B/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
         </span>
     </span>
 
   
-    <span id="/2021/12/22/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" class="post-meta-item leancloud_visitors" data-flag-title="拓扑排序" title="阅读次数">
+    <span id="/2022/02/22/Java-io/" class="post-meta-item leancloud_visitors" data-flag-title="Java文件操作ava 流(Stream)、文件(File)和IO" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -294,8 +291,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2021/12/22/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/12/22/拓扑排序/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2022/02/22/Java-io/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/02/22/Java-io/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -313,17 +310,28 @@
         <img src="https://" alt="" style="width:100%" />  
 
 <p><strong>前言</strong></p>
-<p>总结一下拓扑排序相关的知识点和代码</p>
-<p><a href="https://sm.ms/image/9cDbKx6CoEXuWkF" target="_blank"><img src="https://s2.loli.net/2021/12/28/9cDbKx6CoEXuWkF.jpg" ></a></p>
+<p>Java.io 包几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。</p>
+<p>Java.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。</p>
+<p>一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。</p>
+<p>Java 为 I/O 提供了强大的而灵活的支持，使其更广泛地应用到文件传输和网络编程中。</p>
 <span id="more"></span>
 
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>拓扑排序是对DAG（有向无环图）上的节点进行排序，使得对于每一条有向边 v -&gt; j ， v 都在 j 之前出现。简单地说，是在不破坏节点先后顺序的前提下，把DAG拉成一条链。如果以游戏中的科技树（虽然名字带树，其实常常不是树而只是DAG）举例，拓扑排序就是找到一种可能的点科技树的顺序。<br>参考文章:<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/260112913">https://zhuanlan.zhihu.com/p/260112913</a></p>
-<h1 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h1><p>从AVO网中选择一个入度为0的顶点输出，然后删除此结点，并删除以此顶点为尾的弧，继续重复此步骤，直到输出全部顶点或者AVO网中不存在入度为0的顶点为止。</p>
-<h1 id="代码解读"><a href="#代码解读" class="headerlink" title="代码解读"></a>代码解读</h1><p>为AVO网建立一个邻接表，并在原基础上增加一个入度域<br>使用栈/队列来存储入度为0的结点<br>栈为深度优先实现<br>队列为广度优先实现<br>最后一步判断是否完成了拓扑排序。</p>
-<p>若图成环，则一定不能构成拓扑排序<br>可以作为判断是否成环的方法之一</p>
-<h1 id="完整代码实现"><a href="#完整代码实现" class="headerlink" title="完整代码实现"></a>完整代码实现</h1><figure class="highlight plaintext"><figcaption><span>[拓扑排序] [lang:C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// edges 邻接矩阵</span><br><span class="line">// deg是入度，在存图的时候需要录入数据</span><br><span class="line">// A是排序后的数组</span><br><span class="line">int deg[MAXN], A[MAXN];</span><br><span class="line">bool toposort(int n)</span><br><span class="line">&#123;</span><br><span class="line">    int cnt = 0;</span><br><span class="line">    queue&lt;int&gt; q;</span><br><span class="line">	// 先将本没有入度的结点输入进队列</span><br><span class="line">    for (int i = 1; i &lt;= n; ++i)</span><br><span class="line">        if (deg[i] == 0)</span><br><span class="line">            q.push(i);</span><br><span class="line">    while (!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        int t = q.front();</span><br><span class="line">		// 输出辅助队列中首位元素，并以此元素为下一次循环的判断准则</span><br><span class="line">        q.pop();</span><br><span class="line">        A[cnt++] = t;</span><br><span class="line">		// 遍历上一个排序好的元素行的元素，判断此元素相邻的结点是否符合规则</span><br><span class="line">        for (auto to : edges[t])</span><br><span class="line">        &#123;</span><br><span class="line">            deg[to]--;</span><br><span class="line">            if (deg[to] == 0) // 出现了新的入度为0的点</span><br><span class="line">                q.push(to);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return cnt == n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="读取控制台"><a href="#读取控制台" class="headerlink" title="读取控制台"></a>读取控制台</h1><h2 id="读取输入"><a href="#读取输入" class="headerlink" title="读取输入"></a>读取输入</h2><p>Java 的控制台输入由 System.in 完成<br>可以封装在一个BufferedReader中<br>BufferedReader类从字符输入流中读取文本并缓冲字符，以便有效地读取字符，数组和行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">c = (char) br.read();</span><br><span class="line">System.out.println(c);</span><br><span class="line"></span><br><span class="line">str = br.readLine();</span><br><span class="line">System.out.println(str);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<hr />
+<p>使用 read() 方法从控制台读取一个字符，用 readLine() 方法读取一个字符串。</p>
+<h2 id="控制台输出"><a href="#控制台输出" class="headerlink" title="控制台输出"></a>控制台输出</h2><p>控制台的输出由 print( ) 和 println() 完成,print()输出完毕后不换行，而println()输出完毕后会换行，<br>方法都由类 PrintStream 定义，System.out 是该类对象的一个引用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int b;</span><br><span class="line">b = &#x27;A&#x27;;</span><br><span class="line">System.out.println(b);</span><br><span class="line">System.out.println(&#x27;\n&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h1><h2 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h2><p>创建一个文件对象来创建一个输入流对象读取文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File f = new File(&quot;C:/java/hello&quot;);</span><br><span class="line">InputStream in = new FileInputStream(f);</span><br></pre></td></tr></table></figure>
+
+<p>相关函数<br>|  序号 | 方法 | 描述 |<br>|:—–|:—–|:—–|<br>|     1  |    close()   |  关闭此文件输入流并释放与此流有关的所有系统资源     |<br>|     2  |    write(int r)   |  从 InputStream 对象读取指定字节的数据。返回为整数值，返回下一字节数据，如果已经到结尾则返回-1。     |<br>|     3  |    write(byte[] r)    |  从输入流读取r.length长度的字节。返回读取的字节数。如果是文件结尾则返回-1。     |</p>
+<h2 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h2><p>创建一个文件并向文件中写数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OutputStream f = new FileOutputStream(&quot;C:/java/hello&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>相关函数<br>|  序号 | 方法 | 描述 |<br>|:—–|:—–|:—–|<br>|     1  |    close()   |  关闭此文件输入流并释放与此流有关的所有系统资源     |<br>|     2  |    write(int w)   |  写入指定字节的数据。 |<br>|     3  |    write(byte[] w)    |  写入w.length长度的字节。     |</p>
+<h1 id="xx3x"><a href="#xx3x" class="headerlink" title="xx3x"></a>xx3x</h1><hr />
 版权信息
     </div>
 
@@ -351,22 +359,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
-              <a href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag"># 排序</a>
-              <a href="/tags/AOV/" rel="tag"># AOV</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/12/22/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" rel="prev" title="最短路径">
-                  <i class="fa fa-chevron-left"></i> 最短路径
+                <a href="/2022/02/21/java-note/" rel="prev" title="Java 学习笔记(基础篇)">
+                  <i class="fa fa-chevron-left"></i> Java 学习笔记(基础篇)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/12/22/%E9%AA%91%E5%A3%AB%E5%91%A8%E6%B8%B8%E9%97%AE%E9%A2%98/" rel="next" title="骑士周游问题">
-                  骑士周游问题 <i class="fa fa-chevron-right"></i>
+                <a href="/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="next" title="编译原理基础概念">
+                  编译原理基础概念 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
