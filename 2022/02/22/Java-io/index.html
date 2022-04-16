@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https:///">
 <meta property="article:published_time" content="2022-02-22T09:19:12.000Z">
-<meta property="article:modified_time" content="2022-04-15T08:26:06.913Z">
+<meta property="article:modified_time" content="2022-04-16T05:08:41.028Z">
 <meta property="article:author" content="不对de林">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">1.</span> <span class="nav-text">读取控制台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">读取输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA"><span class="nav-number">1.2.</span> <span class="nav-text">控制台输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">读写文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FileInputStream"><span class="nav-number">2.1.</span> <span class="nav-text">FileInputStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileOutputStream"><span class="nav-number">2.2.</span> <span class="nav-text">FileOutputStream</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xx3x"><span class="nav-number">3.</span> <span class="nav-text">xx3x</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="nav-number">1.</span> <span class="nav-text">读取控制台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">读取输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA"><span class="nav-number">1.2.</span> <span class="nav-text">控制台输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">读写文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FileInputStream"><span class="nav-number">2.1.</span> <span class="nav-text">FileInputStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileOutputStream"><span class="nav-number">2.2.</span> <span class="nav-text">FileOutputStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%89%E8%A1%8C%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">按行读取文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xx3x"><span class="nav-number">3.</span> <span class="nav-text">xx3x</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -258,7 +258,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2022-04-15 16:26:06" itemprop="dateModified" datetime="2022-04-15T16:26:06+08:00">2022-04-15</time>
+        <time title="修改时间：2022-04-16 13:08:41" itemprop="dateModified" datetime="2022-04-16T13:08:41+08:00">2022-04-16</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -326,11 +326,61 @@
 <h1 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h1><h2 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h2><p>创建一个文件对象来创建一个输入流对象读取文件。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File f = new File(&quot;C:/java/hello&quot;);</span><br><span class="line">InputStream in = new FileInputStream(f);</span><br></pre></td></tr></table></figure>
 
-<p>相关函数<br>|  序号 | 方法 | 描述 |<br>|:—–|:—–|:—–|<br>|     1  |    close()   |  关闭此文件输入流并释放与此流有关的所有系统资源     |<br>|     2  |    write(int r)   |  从 InputStream 对象读取指定字节的数据。返回为整数值，返回下一字节数据，如果已经到结尾则返回-1。     |<br>|     3  |    write(byte[] r)    |  从输入流读取r.length长度的字节。返回读取的字节数。如果是文件结尾则返回-1。     |</p>
+<p>相关函数</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">close()</td>
+<td align="left">关闭此文件输入流并释放与此流有关的所有系统资源</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">read(int r)</td>
+<td align="left">从 InputStream 对象读取指定字节的数据。返回为整数值，返回下一字节数据，如果已经到结尾则返回-1</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">read(byte[] r)</td>
+<td align="left">从输入流读取r.length长度的字节。返回读取的字节数。如果是文件结尾则返回-1</td>
+</tr>
+</tbody></table>
 <h2 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h2><p>创建一个文件并向文件中写数据。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OutputStream f = new FileOutputStream(&quot;C:/java/hello&quot;)</span><br></pre></td></tr></table></figure>
 
-<p>相关函数<br>|  序号 | 方法 | 描述 |<br>|:—–|:—–|:—–|<br>|     1  |    close()   |  关闭此文件输入流并释放与此流有关的所有系统资源     |<br>|     2  |    write(int w)   |  写入指定字节的数据。 |<br>|     3  |    write(byte[] w)    |  写入w.length长度的字节。     |</p>
+<p>相关函数</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">close()</td>
+<td align="left">关闭此文件输入流并释放与此流有关的所有系统资源</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">write(int w)</td>
+<td align="left">写入指定字节的数据</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">write(byte[] w)</td>
+<td align="left">写入w.length长度的字节</td>
+</tr>
+</tbody></table>
+<h2 id="按行读取文件"><a href="#按行读取文件" class="headerlink" title="按行读取文件"></a>按行读取文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FileInputStream fis = new FileInputStream(fin);</span><br><span class="line"></span><br><span class="line">//Construct BufferedReader from InputStreamReader</span><br><span class="line"></span><br><span class="line">BufferedReader br = new BufferedReader(new InputStreamReader(fis));</span><br><span class="line"></span><br><span class="line">String line = null;</span><br><span class="line"></span><br><span class="line">while ((line = br.readLine()) != null) &#123;undefined</span><br><span class="line">  System.out.println(line);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">br.close();</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h1 id="xx3x"><a href="#xx3x" class="headerlink" title="xx3x"></a>xx3x</h1><hr />
 版权信息
     </div>
