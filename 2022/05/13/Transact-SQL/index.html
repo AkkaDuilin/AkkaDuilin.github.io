@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/public/search.xml","localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="前言 SQL Server 在支持标准 SQL 语言的同时，对其进行了扩充，引入了 T-SQL，即 Transact-SQL。通过 T-SQL，可以定义变量、使用流控制语句、自定义函数和存储过程，极大地扩展了 SQL Server 的功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transact-SQL">
+<meta property="og:url" content="http://akkaduilin.com/2022/05/13/Transact-SQL/index.html">
+<meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
+<meta property="og:description" content="前言 SQL Server 在支持标准 SQL 语言的同时，对其进行了扩充，引入了 T-SQL，即 Transact-SQL。通过 T-SQL，可以定义变量、使用流控制语句、自定义函数和存储过程，极大地扩展了 SQL Server 的功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:///">
+<meta property="og:image" content="https://s2.loli.net/2022/05/13/ul2WgxJFGmYLaAs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/13/muU79kRgsFht4bn.png">
+<meta property="article:published_time" content="2022-05-13T10:52:21.000Z">
+<meta property="article:modified_time" content="2022-05-14T03:29:51.455Z">
+<meta property="article:author" content="不对de林">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:///">
+
+
+<link rel="canonical" href="http://akkaduilin.com/2022/05/13/Transact-SQL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/05/13/Transact-SQL/","path":"2022/05/13/Transact-SQL/","title":"Transact-SQL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Transact-SQL | 咸鱼享乐，摸鱼快乐</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="咸鱼享乐，摸鱼快乐" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">咸鱼享乐，摸鱼快乐</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">语法约定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.1.</span> <span class="nav-text">注释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">2.</span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F"><span class="nav-number">5.1.</span> <span class="nav-text">日期</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%B9%E5%A4%84%E7%90%86%E5%92%8C%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text">批处理和流程控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IF%E2%80%A6ELSE-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.1.</span> <span class="nav-text">IF…ELSE 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CASE-%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.2.</span> <span class="nav-text">CASE 分支语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHILE-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.3.</span> <span class="nav-text">WHILE 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GOTO-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.4.</span> <span class="nav-text">GOTO 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAITFOR-%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.5.</span> <span class="nav-text">WAITFOR 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TRY-CATCH"><span class="nav-number">6.6.</span> <span class="nav-text">TRY-CATCH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Raiserror"><span class="nav-number">6.7.</span> <span class="nav-text">Raiserror</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%B8%E6%A0%87"><span class="nav-number">7.</span> <span class="nav-text">游标</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="不对de林"
+      src="/images/glass.jpg">
+  <p class="site-author-name" itemprop="name">不对de林</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AkkaDuilin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AkkaDuilin" rel="noopener" target="_blank">GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/2075861530@qq.com" title="E-Mail → 2075861530@qq.com">E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/05/13/Transact-SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/glass.jpg">
+      <meta itemprop="name" content="不对de林">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼享乐，摸鱼快乐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Transact-SQL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-13 18:52:21" itemprop="dateCreated datePublished" datetime="2022-05-13T18:52:21+08:00">2022-05-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-05-14 11:29:51" itemprop="dateModified" datetime="2022-05-14T11:29:51+08:00">2022-05-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2022/05/13/Transact-SQL/" class="post-meta-item leancloud_visitors" data-flag-title="Transact-SQL" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2022/05/13/Transact-SQL/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/05/13/Transact-SQL/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="https://" alt="" style="width:100%" />  
+
+<p><strong>前言</strong></p>
+<p>SQL Server 在支持标准 SQL 语言的同时，对其进行了扩充，引入了 T-SQL，即 Transact-SQL。通过 T-SQL，可以定义变量、使用流控制语句、自定义函数和存储过程，极大地扩展了 SQL Server 的功能。</p>
+<span id="more"></span>
+
+<h1 id="语法约定"><a href="#语法约定" class="headerlink" title="语法约定"></a>语法约定</h1><p><a href="https://sm.ms/image/ul2WgxJFGmYLaAs" target="_blank"><img src="https://s2.loli.net/2022/05/13/ul2WgxJFGmYLaAs.png" ></a></p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>注释语句不是可执行语句，不参与程序的编译、注释语句通常是用来说明代码的功能或<br>者对代码的实现方式给出简单的解释和提示。<br>在 T-SQL 中可使用两类注释符：</p>
+<ol>
+<li>“–”用于单行注释；</li>
+<li>“/* */”用于多行注释。“/<em>”用于注释文字的开头，“</em>/”用于注释文字的结束。</li>
+</ol>
+<h1 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h1><p>SQL Server 有两类标识符：<br>1）常规标识符：符合标识符的格式规则。在 T-SQL 语句中使用常规标识符时不用将其<br>分隔开。<br><strong>常规标识符的定义规则如下：</strong><br>  1） 名称的长度可以从 1 到 128（对于本地临时表，标识符最多可以有 116 个字符）。<br>  2） 名称的第一个字符必须是一个字母或者“_”、“@”和“#”中的任意字符。<br>  3） 在中文版 SQL Server 中，可以直接使用中文名称。<br>  4） 名称中不能有空格<br>  5） 不允许使用 SQL Server 的保留字。<br>2）分隔标识符：在 T-SQL 中，不符合常规标识符定义规则的标识符必须用分隔符双引<br>号 (“) 或者方括号 ([ ])分隔，称为分隔标识符。例如：Select * from [my table]中，因为“my<br>table”中间含有空格，不符合常规标识符的定义规则，因此必须用分隔符 ([ ])进行分隔。</p>
+<p><strong>使用</strong><br>[[[server.][database].][owner_name].] object_name<br>1）server：本地服务器；<br>2）database：当前数据库；<br>3）owner_name：在数据库中与当前连接会话登录标识相关联的数据库用户名或数据库<br>所有者（dbo）。<br>例如，需要引用 customer 数据库中 employee 表的 telephone 列，可指定 customer..<br>employee.telephone。</p>
+<h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><ol>
+<li><p>字符串<br>单引号内</p>
+</li>
+<li><p>Unicode字符串<br>与普通字符串类似，前面有N标识</p>
+</li>
+<li><p>二进制常量<br>前有 0x 标识</p>
+</li>
+<li><p>datetime 常量<br>datetime 常量使用特定格式的字符日期值来表示，并被单引号括起来。<br>下面是 datetime 常量的示例：<br>‘December 5, 1985’； ‘5 December, 1985’； ‘12/5/98’<br>‘851205’（其中的 0 不能省略）<br>下面是时间常量的示例：’14:30:24’； ‘04:24 PM’</p>
+</li>
+<li><p>int<br>不包含小数</p>
+</li>
+<li><p>decimal<br>包含小数点的数字</p>
+</li>
+<li><p>float/real<br>科学计数法表示</p>
+</li>
+<li><p>money<br>money 常量以前缀为可选的小数点和可选的货币符号的数字字符串来表示。money 常<br>量不使用引号括起。money 常量的示例：$542023.14，￥30。</p>
+</li>
+</ol>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>声明变量：<br>DECLARE @变量名 变量类型[,@变量名 变量类型…]</p>
+<p>赋值：<br>SET @变量名=表达式<br>或：SELECT @局部变量=变量值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @no varchar(10) </span><br><span class="line">--变量赋值</span><br><span class="line">SET @no=&#x27;Bj10001&#x27; </span><br><span class="line">--显示指定学生学号、姓名 </span><br><span class="line">SELECT Sid,Sname FROM student WHERE SID=@no</span><br></pre></td></tr></table></figure>
+
+<p>全局变量是 SQL Server 系统内部使用的变量，其作用范围并不局限于某一程序，而是<br>任何程序均可随时调用。<br>格式：@@变量名。<br><a href="https://sm.ms/image/muU79kRgsFht4bn" target="_blank"><img src="https://s2.loli.net/2022/05/13/muU79kRgsFht4bn.png" alt="image.png"></a></p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><ol>
+<li><p>ASCII 函数<br>函数格式：<br>ASCII（character_expression）<br>功能：求 character_expression（char 或 varchar 类型）左端第一个字符的 ASCII 码。<br>返回值数据类型：int。例如：<br>Select ASCII（’abcd’） –结果为字符 a 的 ASCII 码 97。</p>
+</li>
+<li><p>CHAR 函数<br>函数格式：<br>CHAR（integer_expression）<br>功能：求 ASCII 码 integer_expression 对应的字符，<br>integer_expression 的有效范围为[0,255]，如果超出范围，则返<br>回值 NULL。<br>返回值数据类型：CHAR。例如：<br>Select CHAR（97） –结果为’a’。<br>CHAR 可用于将控制字符插入字符串中。表 9- 8 显示了<br>一些常用的控制字符。<br>例9- 6: 使用回车符。<br>select ‘<strong>‘+char(13)+’</strong>*’<br>结果如图 9- 1 所示（注意，显示该结果时，在查询编辑器中，<br>需在查询工具栏选择“以文本格式显示结果”）。</p>
+</li>
+<li><p>UNICODE 函数<br>语法:<br>UNICODE ( ‘ncharacter_expression’ )<br>功能：按照 Unicode 标准的定义，返回输入表达式的第一个字<br>符的整数值。<br>返回类型：int。例如：<br>Select unicode(N’kerge’) –返回字符 k 的 unicode 值 107</p>
+</li>
+<li><p>NCHAR 函数<br>语法：NCHAR ( integer_expression )<br>功能: 根据 Unicode 标准所进行的定义，用给定整数代码返回 Unicode 字符。<br>integer_expression 介于 0 与 65535 之间的所有正整数。如果指定了超出此范围的值，将返<br>回 NULL。<br>返回类型：nchar(1)。例如：<br>select nchar(107) –返回 unicode 字符 k</p>
+</li>
+<li><p>CHARINDEX 函数<br>函数格式：<br>CHARINDEX（expression1, expression2[,start]）<br>功能：在 expression2 中由 start 指定的位置开始查找 expression1 第一次出现的位置，如<br>表 9- 8 控制字符及值<br>控制字符 值<br>制表符 CHAR(9)<br>换行符 CHAR(10)<br>回车 CHAR(13)<br>图 9- 1 char 函数示例<br>果没有找到，则返回 0。如果省略 start，或 start≤0，则从 expression2 的第一个字符开始。<br>返回类型：int。例如：<br>Select CHARINDEX(‘ab’, ‘123abc123abc’) –结果为 4。</p>
+</li>
+<li><p>LEFT 函数<br>函数格式：<br>LEFT（expression1,n）<br>功能：返回字符串 expression1 从左边开始 n 个字符组成的字符串。如果 n=0，则返回一<br>个空字符串。<br>返回类型：varchar。例如：<br>LEFT(‘abcde’, 3) –结果为’abc’。 例 9- 7：找出 dbo.student 中名字以’刘’开头的学生信息。<br>select sno,sname from dbo.student where left(sname,1)=’刘’</p>
+</li>
+<li><p>RIGHT 函数<br>函数格式：<br>RIGHT（expression1,n）<br>功能：返回字符串 expression1 从右边开始 n 个字符组成的字符串。如果 n=0，则返回一<br>个空字符串。<br>返回类型：varchar。例如：<br>Select RIGHT(‘abcde’, 3) –结果为’cde’。</p>
+</li>
+<li><p>SUBSTRING 函数<br>函数格式：<br>SUBSTRING（expression1,start,length）<br>功能：返回 expression1（数据类型为字符串、binary、text 或 image）中从 start 开始长<br>度为 length 个字符或字节的子串。<br>返回值：数据类型与 expression1 数据类型相同，但 text 类型返回值为 varchar，image 类<br>型返回值为 varbinary，next 类型返回值为 nvarchar。例如：<br>Select SUBSTRING(‘abcde123’,3,4) –结果为’cde1’。 例 9- 7 也可以写成：<br>select sno,sname from dbo.student where substring(sname,1,1)=’刘’</p>
+</li>
+<li><p>LEN 函数<br>函数格式：<br>LEN（expression1）<br>功能：返回字符串 expression1 中的字符个数，不包括字符串末尾的空格。<br>返回类型：int。例如：<br>Select LEN(‘abcde ‘) –结果为 5。<br>select len(‘刘’) –结果为 1。</p>
+</li>
+<li><p>DATALENGTH 函数<br>DATALENGTH ( expression )<br>功能：返回用于表示任何表达式的字节数。<br>返回类型：int。例如：<br>Select DATALENGTH(‘abcde ‘) –结果为 8（含 3 个空格）。<br>select DATALENGTH(‘刘’) –结果为 2。</p>
+</li>
+<li><p>LOWER 函数<br>函数格式：<br>LOWER（expression1）<br>功能：将字符串 expression1 中的大写字母替换为小写字母。<br>返回类型：varchar。例如：<br>Select LOWER(‘12ABC45*%^def’) –结果为’12abc45*%^def’。</p>
+</li>
+<li><p>UPPER 函数<br>函数格式：<br>UPPER（expression1）<br>功能：将字符串 expression1 中的小写字母替换为大写字母。<br>返回类型：varchar。例如：<br>Select UPPER(‘12ABC45*%^def’) –结果为’12ABC45 *%^DEF’。</p>
+</li>
+<li><p>LTRIM 函数<br>函数格式：<br>LTRIM（expression1）<br>功能：删除字符串 expression1 左端的空格。<br>返回类型：varchar。例如：<br>Select LTRIM(‘ 12AB’) –结果为’12AB’。</p>
+</li>
+<li><p>RTRIM 函数<br>函数格式：<br>RTRIM（expression1）<br>功能：删除字符串 expression1 末尾的空格。<br>返回类型：varchar。例如：<br>Select RTRIM(LTRIM(‘ 12AB ‘)) –结果为’12AB’。</p>
+</li>
+<li><p>REPLACE 函数<br>函数格式：<br>REPLACE（expression1, expression2, expression3）<br>功能：将字符串 expression1 中所有的子字符串 expression2 替换为 expression3。<br>返回值数据类型：varchar。例如：<br>Select REPLACE(‘abcde’,’de’,’12’) –结果为’abc12’。</p>
+</li>
+<li><p>STUFF 函数<br>语法:<br>STUFF (character_expression,start,length,character_expression )<br>功能：删除指定长度的字符并在指定的起始点插入另一组字符。<br>返回类型:如果 character_expression 是一个支持的字符数据类型，则返回字符数据。<br>例如：<br>Select STUFF(‘abcde’,4,2,’12’) –结果为’abc12’。</p>
+</li>
+<li><p>REVERSE 函数<br>函数格式：<br>REVERSE（expression1）<br>功能：按相反顺序返回字符串 expression1 中的字符。<br>返回值数据类型：varchar。例如：<br>Select REVERSE (‘edcba’) –结果为 abcde。</p>
+</li>
+<li><p>SPACE 函数<br>函数格式：<br>SPACE（n）<br>功能：返回包含 n 个空格的字符串，如果 n 为负数，则返回一个空字符串。<br>返回值数据类型：char。</p>
+</li>
+<li><p>STR 函数<br>函数格式：<br>STR（expression1[,length[,decimal]]）<br>功能：将数字数据转换为字符数据。length 为转换得到的字符串总长度，包括符号、小<br>数点、数字或空格。如果数字长度不够，则在左端加入空格补足长度，如果小数部分超过总<br>长度，则进行四舍五入，length 的默认值为 10，decimal 为小数位位数。<br>返回值数据类型：char。例如：<br>select str(123,6) –结果为’ 123’<br>select str(123.456,5) –结果为’ 123’<br>select str(123.456,5,2) –结果为’123.5’<br>select str(123.456,8,2) –结果为’ 123.46’</p>
+</li>
+<li><p>REPLICATE(character_expression,times)<br>语法：<br>REPLICATE(character_expression,times)<br>功能：返回多次复制后的字符表达式。times 参数的计算结果必须为整数。例如：<br>select replicate(‘<em>‘,3) –返回‘</em><em><em>’ 例 9- 8：以“</em>”方式输出菱形。<br>输出结果见 图 9- 2（在查询编辑器中以文本格式显示结果）。<br>declare @i int<br>set @i=1<br>while @i&lt;=4<br>begin<br>print space(4-@i)+<br>replicate(‘<em>‘,2</em>@i-1)<br>set @i=@i+1<br>end<br>set @i=1<br>while @i&lt;=3<br>begin<br>print space(@i)+replicate(‘*’,7-2</em>@i)<br>set @i=@i+1<br>end</p>
+</li>
+<li><p>CAST 函数<br>功能：将一种数据类型的表达式转换为另一种数据类型的表达式。<br>语法：<br>CAST ( expression AS data_type [ (length ) ])<br>例：</p>
+</li>
+</ol>
+<p>–将日期时间类型转换为 char 类型<br>select cast(‘2010-3-2’ as char(10))</p>
+<ol start="22">
+<li><p>CONVERT 函数<br>CONVERT 函数将一种数据类型的表达式转换为另一种数据类型的表达式。<br>语法：<br>CONVERT ( data_type [ ( length ) ] , expression [ , style ] )</p>
+</li>
+<li><p>ISDATE 函数<br>语法：<br>ISDATE( expression )<br>功能：如果 expression 是 datetime 或 smalldatetime 数据类型的有效日期或时间值，则<br>返回 1；否则，返回 0。例如：<br>select ISDATE(‘2009/2/29’) –返回 0</p>
+</li>
+<li><p>ISNULL ( check_expression , replacement_value )<br>语法：<br>ISNULL ( check_expression , replacement_value )<br>功能：如果 check_expression 不为 NULL，则返回它的值；否则，在将 replacement_value<br>隐式转换为 check_expression 的类型（如果这两个类型不同）后，则返回前者。例如：</p>
+</li>
+</ol>
+<p>–如果成绩为 NULL，替换为 0<br>select grade as 成绩,ISNULL(grade,0) as ISNULL_结果 from sc</p>
+<ol start="25">
+<li><p>NULLIF 函数<br>NULLIF ( expression , expression )<br>功能：如果两个指定的表达式相等，则返回空值。</p>
+</li>
+<li><p>ISNUMERIC 函数<br>语法：<br>ISNUMERIC ( expression )<br>功能：确定表达式是否为有效的数值类型。</p>
+</li>
+</ol>
+<h2 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h2><ol>
+<li>GETDATE 函数<br>函数格式：<br>图 9- 2 输出菱形<br>GETDATE（）<br>功能：按 SQL Server 内部标准格式返回系统日期和时间。<br>返回值数据类型：datetime。例如：<br>Select getdate() –结果为 2012-08-13 21:51:32.390</li>
+<li>YEAR 函数<br>函数格式：<br>YEAR（date）<br>功能：返回指定日期 date 中年的整数。<br>返回值数据类型：int。例如：<br>Select year(‘2004-3-5’) –结果为 2004<br>例 9- 9：返回学生表中学生的年龄。<br>select sname as 学号, BirthDate as 出生日期,<br>YEAR(getdate())-YEAR(birthdate) as 年龄<br>from dbo.student<br>结果见图 9- 3 所示。</li>
+<li>MONTH 函数<br>函数格式：<br>MONTH（date）<br>功能：返回指定日期 date 中月份的整数。<br>返回值数据类型：int。例如：<br>Select month(‘2004-3-5’) –结果为 3</li>
+<li>DAY 函数<br>函数格式：<br>DAY（date）<br>功能：返回指定日期 date 中天的整数。<br>返回值数据类型：int。例如：<br>Select day(‘2004-3-5’) –结果为 5</li>
+<li>DATENAME 函数<br>函数格式：<br>DATENAME（datepart,date）<br>功能：返回日期 date 中由 datepart 指定的日期部分的字符串。<br>返回类型：nvarchar。</li>
+<li>DATEPART 函数<br>函数格式：<br>DATEPART（dateprrt,date）<br>功能：与 DATENAME 类似，只是返回值为整数。<br>返回值数据类型：int。</li>
+<li>DATEADD 函数<br>函数格式：<br>DATEADD（dateprrt,n,date）<br>功能：在 date 指定日期时间的 datepart 部分加上 n，得到一个新的日期时间值。<br>返回值数据类型：datetime，如果参数 date 为 smalldatetime，则返回值为 smalldatetime<br>类型。参数 datepart 可以使用如表 9- 9 所示中的短语或缩写。例如：<br>Select dateadd(yy,2,’2012-3-4’) –结果为’2014-03-04 00:00:00.000’<br>Select dateadd(m,2,’2012-3-4’) –结果为’2012-05-04 00:00:00.000’<br>Select dateadd(d,2,’2012-3-4’) –结果为’2012-03-06 00:00:00.000’</li>
+<li>DATEDIFF 函数<br>格式：<br>DATEDIFF ( datepart , startdate , enddate )<br>功能：返回指定的 startdate 和 enddate 之间所跨的指定 datepart 边界的计数（带符号<br>的整数）。<br>例 9- 9：返回学生表中学生的年龄。<br>select sname as 学号, BirthDate as 出生日期,<br>DATEDIFF(yy, birthdate,getdate()) as 年龄 from dbo.student</li>
+</ol>
+<p>datepart可选参数<br>日期部分 缩写 日期部分 缩写<br>年份 yy、yyyy 工作日 dw<br>季度 qq、q 小时 hh<br>月份 mm、m 分钟 mi、n<br>每年的某一日 dy、y 秒 ss、s<br>图 9- 3 YEAR 函数示例<br>日期 dd、d 毫秒 ms<br>星期 wk、ww 工作日 dw</p>
+<h1 id="批处理和流程控制语句"><a href="#批处理和流程控制语句" class="headerlink" title="批处理和流程控制语句"></a>批处理和流程控制语句</h1><h2 id="IF…ELSE-语句"><a href="#IF…ELSE-语句" class="headerlink" title="IF…ELSE 语句"></a>IF…ELSE 语句</h2><ol>
+<li>如果满足条件，则在 IF 关键字及其条件之后执行<br>T-SQL 语句。可选的 ELSE 关键字引入另一个 T-SQL 语句，当不满足 IF 条件时就执行该<br>语句。</li>
+<li>在实际程序中，IF…ELSE 语句中不止包含一条语句，而是一组的 SQL 语句。为了可以<br>一次执行一组 SQL 语句，这时就需要使用 BEGIN…END 语句将多条语句封闭起来。</li>
+</ol>
+<p>eg 查找学号为 200215121 的成绩。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DECLARE @message varchar(255),@grade_num int</span><br><span class="line">--得到 200215121 号同学的选修课程的数目</span><br><span class="line">SELECT @grade_num=COUNT(grade) FROM sc </span><br><span class="line">WHERE sno=&#x27;200215121&#x27;</span><br><span class="line">IF @grade_num=0</span><br><span class="line"> BEGIN</span><br><span class="line">  SET @message= &#x27;没有学生 200215121 的成绩&#x27;</span><br><span class="line">  PRINT @message</span><br><span class="line"> END</span><br><span class="line">ELSE</span><br><span class="line"> BEGIN</span><br><span class="line">  SET @message= &#x27;有学生 200215121 的&#x27;</span><br><span class="line">  + convert(char(2),@grade_num)+ &#x27;门课程的成绩。&#x27;</span><br><span class="line">  PRINT @message</span><br><span class="line"> END</span><br><span class="line">SET @message=&#x27;课程号查询完毕&#x27;</span><br><span class="line">PRINT @message</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<h2 id="CASE-分支语句"><a href="#CASE-分支语句" class="headerlink" title="CASE 分支语句"></a>CASE 分支语句</h2><p>CASE 关键字可根据表达式的真假来确定是否返回某个值，可在允许使用表达式的任意<br>位置使用这一关键字。<br>eg 为学生表的每个院系添加说明。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT sname AS 学号,sdept AS 院系, &#x27;院系说明&#x27;=</span><br><span class="line">CASE sdept</span><br><span class="line">  --分别为各个院系添加说明</span><br><span class="line">  WHEN &#x27;IS&#x27; THEN &#x27;属于信息系&#x27;</span><br><span class="line">  WHEN &#x27;MA&#x27; THEN &#x27;属于数学院&#x27;</span><br><span class="line">  WHEN &#x27;CS&#x27; THEN &#x27;属于计算机科学与技术学院&#x27;</span><br><span class="line">ELSE &#x27;其他院系&#x27;</span><br><span class="line">END </span><br><span class="line">FROM student ORDER BY sname --按照姓名排序</span><br></pre></td></tr></table></figure>
+
+<h2 id="WHILE-语句"><a href="#WHILE-语句" class="headerlink" title="WHILE 语句"></a>WHILE 语句</h2><p>设置重复执行 SQL 语句或语句块的条件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WHILE 逻辑表达式</span><br><span class="line">Begin</span><br><span class="line"> T-SQL 语句组</span><br><span class="line">[break] /*终止整个语句的执行*/</span><br><span class="line">[continue] /*结束一次循环体的执行*/</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<p>eg 求 1 到 10 之间偶数的和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DECLARE @i smallint,@sum smallint</span><br><span class="line">SET @i=0</span><br><span class="line">SET @sum=0</span><br><span class="line">WHILE @i&gt;=0</span><br><span class="line">BEGIN</span><br><span class="line"> SET @i=@i+1</span><br><span class="line"> IF @i&gt;10</span><br><span class="line"> BEGIN</span><br><span class="line">SELECT &#x27;1 到之间偶数的和&#x27;=@sum</span><br><span class="line"> BREAK</span><br><span class="line"> END</span><br><span class="line"> IF (@i%2)!=0</span><br><span class="line"> CONTINUE</span><br><span class="line"> ELSE</span><br></pre></td></tr></table></figure>
+
+<h2 id="GOTO-语句"><a href="#GOTO-语句" class="headerlink" title="GOTO 语句"></a>GOTO 语句</h2><p>GOTO 语句将执行语句无条件跳转到标签处，并从标签位置继续处理。GOTO 语句和标<br>签可在过程、批处理或语句块中的任何位置使用。其语法格式为：<br>GOTO label</p>
+<h2 id="WAITFOR-语句"><a href="#WAITFOR-语句" class="headerlink" title="WAITFOR 语句"></a>WAITFOR 语句</h2><p>WAITFOR 语句，称为延迟语句，就是暂停执行一个指定的时间间隔或者到一个指定的时间。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">WAITFOR </span><br><span class="line">&#123; </span><br><span class="line">DELAY &#x27;time_to_pass&#x27; /* 设定等待时间 */</span><br><span class="line"></span><br><span class="line">| TIME &#x27;time_to_execute&#x27; /* 设定等待到某一时刻 */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">延迟 30 秒执行查询。</span><br><span class="line">WAITFOR DELAY &#x27;00:00:30&#x27;</span><br><span class="line">SELECT * FROM student</span><br></pre></td></tr></table></figure> 
+
+
+<h2 id="TRY-CATCH"><a href="#TRY-CATCH" class="headerlink" title="TRY-CATCH"></a>TRY-CATCH</h2><p>TRY 块包含一组 T-SQL 语句。如果 TRY 块的语句中发生任何错误，控制将传递给CATCH 块。CATCH 块包含另外一组语句，这些语句在错误发生时执行。如果 TRY 块中没有错误，控制将传递到关联的 END CATCH 语句后紧跟的语句。如果 END CATCH 语句是存储过程或触发器中的最后一条语句，控制将传递到调用该存储过程或触发器的语句。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">BEGIN TRY </span><br><span class="line">&#123; sql_statement | statement_block &#125; </span><br><span class="line">END TRY</span><br><span class="line">BEGIN CATCH </span><br><span class="line">&#123; sql_statement | statement_block &#125; </span><br><span class="line">END CATCH [ ; ]</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+
+<h2 id="Raiserror"><a href="#Raiserror" class="headerlink" title="Raiserror"></a>Raiserror</h2><p>有时会遇到 SQL SERVER 实际并不知道的一些错误，但我们希望能在客户端产生运行错误，而客户端使用的时候能够唤醒异常处理并进行相应的处理。RAISERROR 生成的错误与数据库引擎代码生成的错误的运行方式相同。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">RAISERROR(&lt;message ID | message_string&gt;, &lt;severity #级别 &gt;,&lt;state #状态 &gt; [,&lt;argument&gt; </span><br><span class="line">[,&lt;…n&gt;]]) </span><br><span class="line">[WITH option[,…n]]</span><br></pre></td></tr></table></figure>
+
+<h1 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h1><p>游标（Cursor）是一种从包括多条数据记录的结果集中每次提取一条记录以便处理的机<br>制，可以看做是查询结果的记录指针。<br><strong>游标的作用：</strong><br>1） 允许定位在结果集的特定行。<br>2） 从结果集的当前位置检索一行或一部分行。<br>3） 支持对结果集中当前位置的行进行数据修改。<br>4） 为由其他用户对显示在结果集中的数据所做的更改提供不同级别的可见性支持。<br>5） 提供脚本、存储过程和触发器中用于访问结果集中的数据的 T-SQL 语句。</p>
+<p><strong>@@FETCH_STATUS 全局变量</strong>返回上次执行 FETCH 命令的状态。在每次用 FETCH 从<br>游标中读取数据时，都应检查该变量，以确定上次 FETCH 操作是否成功，来决定如何进行<br>下一步处理。@@FETCH_STATUS 变量有三个不同的返回值: 1）返回值为 0，说明 FETCH 语句成功。<br>2）返回值为-1，说明 FETCH 语句失败或行不在结果集中。<br>3）返回值为-2，说明提取的行不存在。</p>
+<p>利用游标将成绩表（SC）中不及格的成绩改为 60 分。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">--声明变量</span><br><span class="line">declare @v_sno varchar(10),</span><br><span class="line">@v_cno varchar(10),@v_grade int</span><br><span class="line">--声明游标</span><br><span class="line">declare cur scroll cursor</span><br><span class="line">for select sno,cno,grade from sc</span><br><span class="line">--打开游标</span><br><span class="line">open cur</span><br><span class="line">--取出第一行记录</span><br><span class="line">fetch next from cur into @v_sno,@v_cno,@v_grade</span><br><span class="line">--循环取值</span><br><span class="line">while @@FETCH_STATUS=0</span><br><span class="line">begin</span><br><span class="line">--判断当前记录的成绩值</span><br><span class="line">if @v_grade&lt;60</span><br><span class="line"> begin </span><br><span class="line">--显示修改前的成绩</span><br><span class="line"> select sno as 学号,cno as 课程号,grade as 更改前的成绩</span><br><span class="line"> from sc where sno=@v_sno and cno=@v_cno</span><br><span class="line">--修改游标所在行的成绩</span><br><span class="line">update sc set grade=60 where current of cur</span><br><span class="line">--显示修改后的成绩</span><br><span class="line"> select sno as 学号,cno as 课程号,grade as 更改后的成绩</span><br><span class="line"> from sc where sno=@v_sno and cno=@v_cno</span><br><span class="line"> end</span><br><span class="line">--取下一行记录</span><br><span class="line">fetch next from cur into @v_sno,@v_cno,@v_grade</span><br><span class="line">end</span><br><span class="line">--关闭游标</span><br><span class="line">close cur</span><br><span class="line">--释放游标</span><br><span class="line">deallocate cur</span><br></pre></td></tr></table></figure>
+
+
+
+<hr />
+版权信息
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="不对de林 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="不对de林 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95/" rel="prev" title="计算机组成原理-运算方法">
+                  <i class="fa fa-chevron-left"></i> 计算机组成原理-运算方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">buduidelin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"f3jaiTbB3hO8V4eAFBA289EL-gzGzoHsz","app_key":"TDrINbch4z5S05NFEUOr1I0h","server_url":"https://akkaduilin.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvMNGOdF","appkey":"prod_03a32a91909e1f1959166b1199dbcf75"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
