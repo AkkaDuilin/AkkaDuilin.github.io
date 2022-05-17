@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/public/search.xml","localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="前言 触发器与存储过程非常相似，触发器也是 SQL 语句集，它是通过事件进行触发而被执行的，不能用 EXECUTE 语句调用；而存储过程可以通过存储过程名字而被直接调用。当对某一表进行诸如 UPDATE、INSERT、DELETE 这些操作时，SQL Server 就会自动执行触发器所定义的 SQL 语句，从而确保对数据的处理必须符合由这些 SQL 语句所定义的规则。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL-触发器">
+<meta property="og:url" content="http://akkaduilin.com/2022/05/16/SQL-%E8%A7%A6%E5%8F%91%E5%99%A8/index.html">
+<meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
+<meta property="og:description" content="前言 触发器与存储过程非常相似，触发器也是 SQL 语句集，它是通过事件进行触发而被执行的，不能用 EXECUTE 语句调用；而存储过程可以通过存储过程名字而被直接调用。当对某一表进行诸如 UPDATE、INSERT、DELETE 这些操作时，SQL Server 就会自动执行触发器所定义的 SQL 语句，从而确保对数据的处理必须符合由这些 SQL 语句所定义的规则。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:///">
+<meta property="article:published_time" content="2022-05-16T13:33:46.000Z">
+<meta property="article:modified_time" content="2022-05-17T09:03:35.029Z">
+<meta property="article:author" content="不对de林">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:///">
+
+
+<link rel="canonical" href="http://akkaduilin.com/2022/05/16/SQL-%E8%A7%A6%E5%8F%91%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/05/16/SQL-%E8%A7%A6%E5%8F%91%E5%99%A8/","path":"2022/05/16/SQL-触发器/","title":"SQL-触发器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SQL-触发器 | 咸鱼享乐，摸鱼快乐</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="咸鱼享乐，摸鱼快乐" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">咸鱼享乐，摸鱼快乐</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DML%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">DML触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9A%84%E9%80%BB%E8%BE%91%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">相关的逻辑表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">1.3.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">1.4.</span> <span class="nav-text">例题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DDL%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">DDL触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-1"><span class="nav-number">2.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="nav-number">2.2.</span> <span class="nav-text">例题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">管理触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B"><span class="nav-number">3.1.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number">3.2.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">3.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%81%E7%94%A8"><span class="nav-number">3.4.</span> <span class="nav-text">禁用</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="不对de林"
+      src="/images/glass.jpg">
+  <p class="site-author-name" itemprop="name">不对de林</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AkkaDuilin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AkkaDuilin" rel="noopener" target="_blank">GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/2075861530@qq.com" title="E-Mail → 2075861530@qq.com">E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/05/16/SQL-%E8%A7%A6%E5%8F%91%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/glass.jpg">
+      <meta itemprop="name" content="不对de林">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼享乐，摸鱼快乐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL-触发器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-16 21:33:46" itemprop="dateCreated datePublished" datetime="2022-05-16T21:33:46+08:00">2022-05-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-05-17 17:03:35" itemprop="dateModified" datetime="2022-05-17T17:03:35+08:00">2022-05-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2022/05/16/SQL-%E8%A7%A6%E5%8F%91%E5%99%A8/" class="post-meta-item leancloud_visitors" data-flag-title="SQL-触发器" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2022/05/16/SQL-%E8%A7%A6%E5%8F%91%E5%99%A8/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/05/16/SQL-触发器/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="https://" alt="" style="width:100%" />  
+
+<p><strong>前言</strong></p>
+<p>触发器与存储过程非常相似，触发器也是 SQL 语句集，它是通过事件进行触发而被执<br>行的，不能用 EXECUTE 语句调用；而存储过程可以通过存储过程名字而被直接调用。当对<br>某一表进行诸如 UPDATE、INSERT、DELETE 这些操作时，SQL Server 就会自动执行触发<br>器所定义的 SQL 语句，从而确保对数据的处理必须符合由这些 SQL 语句所定义的规则。</p>
+<span id="more"></span>
+
+<h1 id="DML触发器"><a href="#DML触发器" class="headerlink" title="DML触发器"></a>DML触发器</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ol>
+<li><p>AFTER 触发器<br>又称后触发器。在执行了 INSERT、UPDATE 或 DELETE 语句操作之后执行 AFTER<br>触发器。如果仅指定 FOR 关键字，则 AFTER 为默认值。AFTER 触发器只能在表上指定，<br>可以为任何一个 DML 操作定义多个 AFTER 触发器</p>
+</li>
+<li><p>INSTEAD OF 触发器<br>又称替代触发器。INSTEAD OF 触发器在数据变动之前被触发，代替引起触发器执行<br>的 T-SQL 语句，即 INSTEAD OF 触发器执行时并不执行所定义的 INSERT、UPDATE 或<br>DELETE 操作，而仅执行触发器本身。</p>
+</li>
+</ol>
+<h2 id="相关的逻辑表"><a href="#相关的逻辑表" class="headerlink" title="相关的逻辑表"></a>相关的逻辑表</h2><p>Inserted 表用于存储 INSERT 和 UPDATE 语句所影响的行的副本。在插入或更新事务<br>期间，新行将同时被添加到 Inserted 表和触发器表（即对其尝试执行了用户操作的表）。<br>Inserted 表中的行是触发器表中的新行的副本。<br>Deleted 表用于存储 DELETE 和 UPDATE 语句所影响的行的副本。在执行 DELETE<br>或 UPDATE 语句的过程中，行从触发器表中删除，并传输到 Deleted 表中。Deleted 表和触<br>发器表通常没有相同的行。</p>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER trigger_name </span><br><span class="line">ON &#123; OBJECT NAME &#125; </span><br><span class="line">&#123; FOR → AFTER → INSTEAD OF &#125; </span><br><span class="line">&#123;[INSERT][,][UPFATE][,][DELETE]&#125; </span><br><span class="line"> AS </span><br><span class="line">&#123; sql_statement [ ...n ] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>1） trigger_name ：指定触发器名称<br>2） OBJECT NAME ：要对其执行 DML 触发器的表或视图<br>3） { FOR → AFTER → INSTEAD OF } ：指定触发器的类型，如果仅指定 FOR 关键<br>字，则 AFTER 是默认值<br>4） {[INSERT][,][UPDATE][,][DELETE]} ：指定激活触发器的数据修改语句，必须至少<br>指定一项，在触发器定义中允许使用上述选项的任意顺序组合。<br>5） sql_statement：指定触发器所指定的 T-SQL 语句。<br>6） 在 DML 触发器中不允许使用下列 Transact-SQL 语句：CREATE /ALTER/ DROP<br>DATABASE、CREATE/DROP INDEX、DROP TABLE；用于执行以下操作的 ALTER TABLE：<br>添加、修改或删除列、添加或删除 PRIMARY KEY 或 UNIQUE 约束。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>创建一个触发器，在修改 SC 表中的 grade 列时，判断平均成绩是否大于 80，<br>如果大于 80，拒绝该修改操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER trgUpdateSC ON dbo.SC</span><br><span class="line">FOR UPDATE</span><br><span class="line">AS</span><br><span class="line">begin</span><br><span class="line">  IF UPDATE (Grade)</span><br><span class="line">    BEGIN</span><br><span class="line">    --判断平均 grade 是否大于 80，如果大于 80，回滚</span><br><span class="line">    if(select avg(Grade) from dbo.SC)&gt;80</span><br><span class="line">      begin</span><br><span class="line">      print &#x27;The average value of Grade cannot be more than 80&#x27;</span><br><span class="line">      rollback</span><br><span class="line">      end</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="DDL触发器"><a href="#DDL触发器" class="headerlink" title="DDL触发器"></a>DDL触发器</h1><p>DDL 触发器当服务器或者数据库中发生数据定义语言（DDL，CREATE、ALTER 和<br>DROP）事件时将被触发。</p>
+<h2 id="创建-1"><a href="#创建-1" class="headerlink" title="创建"></a>创建</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER trigger_name </span><br><span class="line">ON &#123; ALL SERVER → DATABASE &#125; </span><br><span class="line">[ WITH &lt;ddl_trigger_option&gt; [ ,...n ] ]</span><br><span class="line">&#123; FOR → AFTER &#125; &#123; event_type → event_group &#125; [ ,...n ]</span><br><span class="line">AS &#123; sql_statement [ ; ] [ ,...n ]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1） DATABASE :将 DDL 触发器的作用域应用于当前数据库。如果指定了此参数，则<br>只要当前数据库中出现 event_type 或 event_group，就会激发该触发器。<br>2） ALL SERVER :将 DDL 触发器的作用域应用于当前服务器。如果指定了此参数，<br>则只要当前服务器中的任何位置上出现 event_type 或 event_group，就会激发该触发器。<br>3） event_type ：执行之后将导致激发 DDL 触发器的 T-SQL 语言事件的名称。<br>4） event_group ：预定义的 T-SQL 语言事件分组的名称。执行任何属于 event_group<br>的 T-SQL 语言事件之后，都将激发 DDL 触发器。</p>
+<h2 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h2><p>为“Music”数据库创建 DDL 触发器，用于禁止对数据库中的表进行删除和修改操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER trg_safe ON DATABASE </span><br><span class="line">FOR DROP_TABLE, ALTER_TABLE </span><br><span class="line">AS </span><br><span class="line">PRINT &#x27;You must disable Trigger &quot; trg_safe&quot; to drop or alter tables!&#x27; </span><br><span class="line">ROLLBACK</span><br></pre></td></tr></table></figure>
+
+<h1 id="管理触发器"><a href="#管理触发器" class="headerlink" title="管理触发器"></a>管理触发器</h1><h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec sp_helptext trg_delete</span><br></pre></td></tr></table></figure>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ALTER TRIGGER trigger_name</span><br><span class="line">ON &#123; table → view &#125;</span><br><span class="line">&#123; &#123; FOR → AFTER → INSTEAD OF &#125;</span><br><span class="line">&#123; [DELETE] [,] [INSERT] [,] [UPDATE] &#125;</span><br><span class="line">AS</span><br><span class="line">&#123;sql_statement&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TRIGGER Trg_delete</span><br></pre></td></tr></table></figure>
+<h2 id="禁用"><a href="#禁用" class="headerlink" title="禁用"></a>禁用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1）禁用对表的 DML 触发器</span><br><span class="line">DISABLE TRIGGER trg_delete ON Songs</span><br><span class="line"></span><br><span class="line">2）禁用对数据库的 DDL 触发器</span><br><span class="line">DISABLE TRIGGER trig_DDL ON DATABASE</span><br><span class="line"></span><br><span class="line">3）禁用以同一作用域定义的所有触发器</span><br><span class="line">DISABLE TRIGGER ALL ON ALL SERVER</span><br></pre></td></tr></table></figure>
+
+<p>禁用之后的启用操作，应该使用语句 ENABLE TRIGGER，该语句的参数与对应的禁用语句相同。</p>
+<hr />
+版权信息
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="不对de林 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="不对de林 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/13/Transact-SQL/" rel="prev" title="Transact-SQL">
+                  <i class="fa fa-chevron-left"></i> Transact-SQL
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">buduidelin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"f3jaiTbB3hO8V4eAFBA289EL-gzGzoHsz","app_key":"TDrINbch4z5S05NFEUOr1I0h","server_url":"https://akkaduilin.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvMNGOdF","appkey":"prod_03a32a91909e1f1959166b1199dbcf75"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
