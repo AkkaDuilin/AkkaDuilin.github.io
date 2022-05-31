@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/public/search.xml","localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="前言 Swing 是一个为Java设计的GUI工具包。 Swing是JAVA基础类的一部分。 Swing包括了图形用户界面（GUI）器件如：文本框，按钮，分隔窗格和表。 http:&#x2F;&#x2F;c.biancheng.net&#x2F;view&#x2F;1209.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java GUI">
+<meta property="og:url" content="http://akkaduilin.com/2022/04/02/Java%20GUI/index.html">
+<meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
+<meta property="og:description" content="前言 Swing 是一个为Java设计的GUI工具包。 Swing是JAVA基础类的一部分。 Swing包括了图形用户界面（GUI）器件如：文本框，按钮，分隔窗格和表。 http:&#x2F;&#x2F;c.biancheng.net&#x2F;view&#x2F;1209.html">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:///">
+<meta property="article:published_time" content="2022-04-02T01:29:22.000Z">
+<meta property="article:modified_time" content="2022-05-31T09:45:04.501Z">
+<meta property="article:author" content="不对de林">
+<meta property="article:tag" content="Java - GUI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:///">
+
+
+<link rel="canonical" href="http://akkaduilin.com/2022/04/02/Java%20GUI/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/04/02/Java%20GUI/","path":"2022/04/02/Java GUI/","title":"Java GUI"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java GUI | 咸鱼享乐，摸鱼快乐</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="咸鱼享乐，摸鱼快乐" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">咸鱼享乐，摸鱼快乐</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JFrame"><span class="nav-number">1.</span> <span class="nav-text">JFrame</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JPanel"><span class="nav-number">2.</span> <span class="nav-text">JPanel</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="不对de林"
+      src="/images/glass.jpg">
+  <p class="site-author-name" itemprop="name">不对de林</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AkkaDuilin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AkkaDuilin" rel="noopener" target="_blank">GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/2075861530@qq.com" title="E-Mail → 2075861530@qq.com">E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/04/02/Java%20GUI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/glass.jpg">
+      <meta itemprop="name" content="不对de林">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼享乐，摸鱼快乐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java GUI
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-02 09:29:22" itemprop="dateCreated datePublished" datetime="2022-04-02T09:29:22+08:00">2022-04-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-05-31 17:45:04" itemprop="dateModified" datetime="2022-05-31T17:45:04+08:00">2022-05-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2022/04/02/Java%20GUI/" class="post-meta-item leancloud_visitors" data-flag-title="Java GUI" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2022/04/02/Java%20GUI/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/04/02/Java GUI/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="https://" alt="" style="width:100%" />  
+
+<p><strong>前言</strong></p>
+<p>Swing 是一个为Java设计的GUI工具包。</p>
+<p>Swing是JAVA基础类的一部分。</p>
+<p>Swing包括了图形用户界面（GUI）器件如：文本框，按钮，分隔窗格和表。</p>
+<p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/1209.html">http://c.biancheng.net/view/1209.html</a></p>
+<span id="more"></span>
+
+<h1 id="JFrame"><a href="#JFrame" class="headerlink" title="JFrame"></a>JFrame</h1><p>JFrame 用来设计类似于 Windows 系统中窗口形式的界面。JFrame 是 Swing 组件的顶层容器，该类继承了 AWT 的 Frame 类，支持 Swing 体系结构的高级 GUI 属性。</p>
+<table border="1">
+    <caption>
+        表1 JFrame类的常用方法</caption>
+    <tbody>
+        <tr>
+            <th>
+                方法名称</th>
+            <th>
+                概述</th>
+        </tr>
+        <tr>
+            <td>
+                getContentPane()</td>
+            <td>
+                返回此窗体的 contentPane 对象</td>
+        </tr>
+        <tr>
+            <td>
+                getDefaultCloseOperation()</td>
+            <td>
+                返回用户在此窗体上单击&ldquo;关闭&rdquo;按钮时执行的操作</td>
+        </tr>
+        <tr>
+            <td>
+                setContentPane(Container contentPane)</td>
+            <td>
+                设置 contentPane 属性</td>
+        </tr>
+        <tr>
+            <td>
+                setDefaultCloseOperation(int operation)</td>
+            <td>
+                设置用户在此窗体上单击&ldquo;关闭&rdquo;按钮时默认执行的操作</td>
+        </tr>
+        <tr>
+            <td>
+                setDefaultLookAndFeelDecorated (boolean<br />
+                defaultLookAndFeelDecorated)</td>
+            <td>
+                设置 JFrame 窗口使用的 Windows 外观（如边框、关<br />
+                闭窗口的 小部件、标题等）</td>
+        </tr>
+        <tr>
+            <td>
+                setIconImage(Image image)</td>
+            <td>
+                设置要作为此窗口图标显不的图像</td>
+        </tr>
+        <tr>
+            <td>
+                setJMenuBar( JMenuBar menubar)</td>
+            <td>
+                设置此窗体的菜单栏</td>
+        </tr>
+        <tr>
+            <td>
+                setLayout(LayoutManager manager)</td>
+            <td>
+                设置&nbsp;LayoutManager&nbsp;属性</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1 id="JPanel"><a href="#JPanel" class="headerlink" title="JPanel"></a>JPanel</h1><p>JPanel 是一种中间层容器，它能容纳组件并将组件组合在一起，但它本身必须添加到其他容器中使用。JPanel 类的构造方法如下。</p>
+<ol>
+<li>JPanel()：使用默认的布局管理器创建新面板，默认的布局管理器为 FlowLayout。</li>
+<li>JPanel(LayoutManagerLayout layout)：创建指定布局管理器的 JPanel 对象。</li>
+</ol>
+<table border="1">
+    <caption>
+        表2 JPanel类的常用方法</caption>
+    <tbody>
+        <tr>
+            <th>
+                方法名及返回值类型</th>
+            <th>
+                说明</th>
+        </tr>
+        <tr>
+            <td>
+                Component add(Component comp)</td>
+            <td>
+                将指定的组件追加到此容器的尾部</td>
+        </tr>
+        <tr>
+            <td>
+                void remove(Component comp)</td>
+            <td>
+                从容器中移除指定的组件</td>
+        </tr>
+        <tr>
+            <td>
+                void setFont(Font f)</td>
+            <td>
+                设置容器的字体</td>
+        </tr>
+        <tr>
+            <td>
+                void setLayout(LayoutManager mgr)</td>
+            <td>
+                设置容器的布局管理器</td>
+        </tr>
+        <tr>
+            <td>
+                void setBackground(Color c)</td>
+            <td>
+                设置组件的背景色</td>
+        </tr>
+    </tbody>
+</table>wdas
+# xx3x
+
+<hr />
+版权信息
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="不对de林 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="不对de林 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java-GUI/" rel="tag"># Java - GUI</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/24/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0/" rel="prev" title="关系代数">
+                  <i class="fa fa-chevron-left"></i> 关系代数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/04/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94%E9%80%86%E5%BA%8F%E5%AF%B9%E9%97%AE%E9%A2%98/" rel="next" title="归并排序实战——逆序对问题">
+                  归并排序实战——逆序对问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">buduidelin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"f3jaiTbB3hO8V4eAFBA289EL-gzGzoHsz","app_key":"TDrINbch4z5S05NFEUOr1I0h","server_url":"https://akkaduilin.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvMNGOdF","appkey":"prod_03a32a91909e1f1959166b1199dbcf75"}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
