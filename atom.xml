@@ -6,7 +6,7 @@
   <link href="http://akkaduilin.com/atom.xml" rel="self"/>
   
   <link href="http://akkaduilin.com/"/>
-  <updated>2022-06-23T18:01:55.102Z</updated>
+  <updated>2022-06-25T05:11:57.269Z</updated>
   <id>http://akkaduilin.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机组成原理-储存系统</title>
+    <link href="http://akkaduilin.com/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://akkaduilin.com/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/</id>
+    <published>2022-06-15T03:21:44.000Z</published>
+    <updated>2022-06-25T05:11:57.269Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://" alt="" style="width:100%" />  <p><strong>前言</strong></p><p><a href="https://sm.ms/image/GqxMmSXHt5fobK4" target="_blank"><img src="https://s2.loli.net/2022/06/25/GqxMmSXHt5fobK4.png" ></a></p><p>三级存储结构：高速缓冲存储器、内存、外存</p><p><a href="https://sm.ms/image/fAi3R8N9DSa1dTz" target="_blank"><img src="https://s2.loli.net/2022/06/24/fAi3R8N9DSa1dTz.png" ></a> </p><span id="more"></span><h1 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h1><p>Cache：高速缓冲存储器<br>容量小：几百KB~几MB<br>cache采用静态存储器技术，每位至少需要6个晶体管，直接用触发器方式维持固定的逻辑，所以不需要刷新<br>与内核紧密相连，采用高速同步运行</p><h1 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h1><p><a href="https://sm.ms/image/1IScn824AOelkrE" target="_blank"><img src="https://s2.loli.net/2022/06/24/1IScn824AOelkrE.png" ></a></p><p>CPU从内存访问第一条指令<br>同时将第一条指令所在的页内容复制到cache中</p><p>CPU从cache中查找下一条要执行的指令<br>查找到(命中)，从cache中取指令，执行</p><p>查找不到，从内存中取指令<br>同时将该指令所在的页内容复制到cache中</p><p><a href="https://sm.ms/image/71bFwBuyXfI3aOg" target="_blank"><img src="https://s2.loli.net/2022/06/24/71bFwBuyXfI3aOg.png" ></a></p><h1 id="访问原理"><a href="#访问原理" class="headerlink" title="访问原理"></a>访问原理</h1><h2 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h2><p><a href="https://sm.ms/image/DcJoZ5kjd9bfMNK" target="_blank"><img src="https://s2.loli.net/2022/06/24/DcJoZ5kjd9bfMNK.png" ></a></p><p>把主存的每一块映射到一个固定的Cache槽中。<br>j=i mod 2c，<br>j为Cache槽号<br>i为主存的块号，<br>2c为Cache的槽数。<br>优点：实现简单、花费少。<br>缺点：Cache利用率不高。</p><h2 id="全相联"><a href="#全相联" class="headerlink" title="全相联"></a>全相联</h2><p>通过允许每个主存块装入到Cache的任何一槽中来克服直接映射的缺点</p><h2 id="组相联映射"><a href="#组相联映射" class="headerlink" title="组相联映射"></a>组相联映射</h2><p><a href="https://sm.ms/image/JtmLc9T6D3MbCrv" target="_blank"><img src="https://s2.loli.net/2022/06/24/JtmLc9T6D3MbCrv.png" ></a><br>上述两种方案的折中。<br>按号分组 组内随意放<br>把Cache分成2C’组<br>每组有2r个槽<br>2C =2C’×2r<br>j=(i mod 2C’)* 2r +k<br>(k=0，1，…，2r-1)</p><h1 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h1><p><a href="https://sm.ms/image/KEGcbyUmNiJzu7Y" target="_blank"><img src="https://s2.loli.net/2022/06/24/KEGcbyUmNiJzu7Y.png" ></a></p><p><a href="https://sm.ms/image/GubwWY1dnm85Dr2" target="_blank"><img src="https://s2.loli.net/2022/06/24/GubwWY1dnm85Dr2.png" ></a></p><p><a href="https://sm.ms/image/KtrxRQVGBmcWay5" target="_blank"><img src="https://s2.loli.net/2022/06/24/KtrxRQVGBmcWay5.png" ></a></p><h1 id="写策略"><a href="#写策略" class="headerlink" title="写策略"></a>写策略</h1><p>主存和cache中数据一致性问题的解决办法：<br>  写通过（Write through）：所有的写操作对主存和Cache同时进行。<br>  <strong>直写法不需要维护位</strong></p><p>  回写（write back）：只在Cache中修改，当进行修改时，设置与槽有关的修改位。因此，当某个块被替换时，当且仅当修改位被设置时，才将它写回主存。<br>  <strong>写回法需要一位的维护位</strong></p><p>当系统中存在多个Cache时，解决多个Cache中数据的一致性问题的方法：<br>  总线监视法<br>  硬件监视法<br>  划出不可高速缓存存储区法</p><h1 id="虚拟储存器"><a href="#虚拟储存器" class="headerlink" title="虚拟储存器"></a>虚拟储存器</h1><p>虚拟存储器指的是“主存-辅存”层次，它能使计算机具有辅存的容量，接近于主存的速度和辅存的每位成本。使程序员可以按比主存大得多的空间来编制程序，即按虚存空间编址。</p><hr />版权信息]]></content>
+    
+    
+    <summary type="html">&lt;img src=&quot;https://&quot; alt=&quot;&quot; style=&quot;width:100%&quot; /&gt;  
+
+&lt;p&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://sm.ms/image/GqxMmSXHt5fobK4&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://s2.loli.net/2022/06/25/GqxMmSXHt5fobK4.png&quot; &gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;三级存储结构：高速缓冲存储器、内存、外存&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://sm.ms/image/fAi3R8N9DSa1dTz&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://s2.loli.net/2022/06/24/fAi3R8N9DSa1dTz.png&quot; &gt;&lt;/a&gt; &lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>计算机组成原理-中央处理器</title>
@@ -135,9 +157,9 @@
     <category term="编译原理" scheme="http://akkaduilin.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
     
     
-    <category term="语法分析" scheme="http://akkaduilin.com/tags/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
-    
     <category term="编译原理" scheme="http://akkaduilin.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+    <category term="语法分析" scheme="http://akkaduilin.com/tags/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
@@ -515,32 +537,6 @@
     
     
     <category term="Java" scheme="http://akkaduilin.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编译原理基础概念</title>
-    <link href="http://akkaduilin.com/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/"/>
-    <id>http://akkaduilin.com/2022/03/01/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</id>
-    <published>2022-03-01T09:29:16.000Z</published>
-    <updated>2022-06-19T09:16:10.836Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>前言</strong></p><p><strong>编译原理笔记</strong></p><p>编译程序的组成及概念解释</p><p><a href="https://sm.ms/image/KEVZuPkjTrQ2UYa" target="_blank"><img src="https://s2.loli.net/2022/03/01/KEVZuPkjTrQ2UYa.jpg"  style="width:60%"></a></p><span id="more"></span><h1 id="语言处理系统"><a href="#语言处理系统" class="headerlink" title="语言处理系统"></a>语言处理系统</h1><p><a href="https://sm.ms/image/PDkWqNwRTOKUV9M" target="_blank"><img src="https://s2.loli.net/2022/03/01/PDkWqNwRTOKUV9M.jpg" style="width:60%"></a></p><h1 id="翻译器"><a href="#翻译器" class="headerlink" title="翻译器"></a>翻译器</h1><p>翻译器是能够完成从一种语言到另一种语言变换的软件</p><p><a href="https://sm.ms/image/LG9S8uT7lUOkjDi" target="_blank"><img src="https://s2.loli.net/2022/03/01/LG9S8uT7lUOkjDi.jpg" style="width:60%"></a></p><h1 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h1><p>编译器是指将<strong>源程序</strong>编译为目标<strong>可执行程序</strong>的系统</p><p>编译器的前端与后端<br>前端：只依赖于源语言<br>后端：依赖于目标机器，一般独立于源语言，与中间语言有关<br>前端+后端：组合<br>取一个编译器前端，重写它的后端以产生同一源语言在另一机器上的编译器<br>把几种不同的语言编译成同一种中间语言，让不同的前端使用同一后端，从而得到一台机器上的几个编译器<br>编译的几个阶段常用一趟/遍（pass）扫描来实现，一趟/遍扫描包括读一个输入文件和写一个输出文件</p><h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><a href="https://sm.ms/image/yqvLdF9N1MsflIT" target="_blank"><img src="https://s2.loli.net/2022/03/01/yqvLdF9N1MsflIT.jpg" style="width:60%"></a></p><h2 id="分析部分-前端阶段任务"><a href="#分析部分-前端阶段任务" class="headerlink" title="分析部分(前端阶段任务)"></a>分析部分(前端阶段任务)</h2><p>前端：源程序 → 中间表示</p><ol><li><p><strong>词法分析</strong><br><a href="https://sm.ms/image/mLJdAs1lEK3IGeS" target="_blank"><img src="https://s2.loli.net/2022/03/01/mLJdAs1lEK3IGeS.jpg" style="width:60%"></a><br>识别最小语法单位并表示词性<br>逐个读构成源程序的字符，把它们组成词法单元(token)流</p></li><li><p><strong>语法分析</strong><br><a href="https://sm.ms/image/etIwzx8q5EZs3gu" target="_blank"><img src="https://s2.loli.net/2022/03/01/etIwzx8q5EZs3gu.jpg" style="width:60%"></a><br>根据单词词性分析语法<br>把词法记号流依照语言的语法结构按层次分组，以形成语法短语</p></li><li><p><strong>语义分析</strong><br>根据单词值分析语义是否正确<br>· 类型转换<br>· 类型检查<br>· 语法制导翻译</p></li><li><p><strong>中间代码生成</strong><br>生成中间代码<br>中间代码位于<strong>高级编程语言</strong>和<strong>机器语言</strong>（目标程序）之间</p></li></ol><h2 id="综合部分-后端阶段任务"><a href="#综合部分-后端阶段任务" class="headerlink" title="综合部分(后端阶段任务)"></a>综合部分(后端阶段任务)</h2><p>后端：中间表示 → 目标程序</p><ol><li><p><strong>代码优化</strong><br>对中间代码进行优化，以期产生更高效的目标代码。</p></li><li><p><strong>目标程序生成</strong><br>将中间代码转换成低级语言代码、机器代码或汇编码。</p></li><li><p><strong>符号表管理</strong><br>编译器的一项重要工作是记录源程序中使用的标识符，并收集每个标识符的各种属性。<br>符号表是为每个标识符保存一个记录的数据结构，记录的域是标识符的属性。</p></li><li><p><strong>出错管理</strong><br>每个阶段都可能发现源程序的错误。发现错误后，该阶段必须处理此错误，使得编译可以继续进行，以便进一步发现源程序的其他错误。</p></li></ol><h1 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h1><p>百度百科：<br>解释器（英语：Interpreter），又译为直译器，是一种电脑程序，能够把高级编程语言一行一行直接转译运行。解释器不会一次把整个程序转译出来，只像一位“中间人”，每次运行程序时都要先转成另一种语言再作运行，因此解释器的程序运行速度比较缓慢。它每转译一行程序叙述就立刻运行，然后再转译下一行，再运行，如此不停地进行下去。</p><p>编译器与解释器区别：</p><p>解释器不像编译器通过翻译来生成目标程序，而是直接执行源程序所指定的运算。</p><h1 id="混合编译器"><a href="#混合编译器" class="headerlink" title="混合编译器"></a>混合编译器</h1><p><a href="https://sm.ms/image/6qEwzlsM79CA1ki" target="_blank"><img src="https://s2.loli.net/2022/03/01/6qEwzlsM79CA1ki.jpg" style="width:60%"></a></p><hr />版权信息]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;编译原理笔记&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;编译程序的组成及概念解释&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://sm.ms/image/KEVZuPkjTrQ2UYa&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://s2.loli.net/2022/03/01/KEVZuPkjTrQ2UYa.jpg&quot;  style=&quot;width:60%&quot;&gt;&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="编译原理" scheme="http://akkaduilin.com/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-    
-    <category term="编译原理" scheme="http://akkaduilin.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-    <category term="概念" scheme="http://akkaduilin.com/tags/%E6%A6%82%E5%BF%B5/"/>
     
   </entry>
   

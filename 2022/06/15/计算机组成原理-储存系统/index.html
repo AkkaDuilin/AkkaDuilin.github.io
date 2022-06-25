@@ -22,30 +22,38 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/public/search.xml","localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="前言 收集一些经常要搜的编程小知识不定期更新  ︿(￣︶￣)︿">
+<meta name="description" content="前言  三级存储结构：高速缓冲存储器、内存、外存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编程用笔记(更新ing)">
-<meta property="og:url" content="http://akkaduilin.com/2021/11/08/my-note/index.html">
+<meta property="og:title" content="计算机组成原理-储存系统">
+<meta property="og:url" content="http://akkaduilin.com/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
-<meta property="og:description" content="前言 收集一些经常要搜的编程小知识不定期更新  ︿(￣︶￣)︿">
+<meta property="og:description" content="前言  三级存储结构：高速缓冲存储器、内存、外存">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2021/12/15/2eoquz8pm6ArHMQ.jpg">
-<meta property="article:published_time" content="2021-11-08T09:33:01.000Z">
-<meta property="article:modified_time" content="2022-06-19T09:20:46.146Z">
+<meta property="og:image" content="https:///">
+<meta property="og:image" content="https://s2.loli.net/2022/06/25/GqxMmSXHt5fobK4.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/fAi3R8N9DSa1dTz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/1IScn824AOelkrE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/71bFwBuyXfI3aOg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/DcJoZ5kjd9bfMNK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/JtmLc9T6D3MbCrv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/KEGcbyUmNiJzu7Y.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/GubwWY1dnm85Dr2.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/24/KtrxRQVGBmcWay5.png">
+<meta property="article:published_time" content="2022-06-15T03:21:44.000Z">
+<meta property="article:modified_time" content="2022-06-25T05:11:57.269Z">
 <meta property="article:author" content="不对de林">
-<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2021/12/15/2eoquz8pm6ArHMQ.jpg">
+<meta name="twitter:image" content="https:///">
 
 
-<link rel="canonical" href="http://akkaduilin.com/2021/11/08/my-note/">
+<link rel="canonical" href="http://akkaduilin.com/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2021/11/08/my-note/","path":"2021/11/08/my-note/","title":"编程用笔记(更新ing)"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/","path":"2022/06/15/计算机组成原理-储存系统/","title":"计算机组成原理-储存系统"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>编程用笔记(更新ing) | 咸鱼享乐，摸鱼快乐</title>
+<title>计算机组成原理-储存系统 | 咸鱼享乐，摸鱼快乐</title>
   
 
 
@@ -151,7 +159,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">环境变量配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vscode-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">2.</span> <span class="nav-text">vscode 常用快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">C++ 时间函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E9%9A%8F%E6%9C%BA%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">C++ 随机函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#malloc%E8%A7%A3%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">malloc解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#auto%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%94%A8%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">auto的循环用法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cache"><span class="nav-number">1.</span> <span class="nav-text">cache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">执行原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">访问原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84"><span class="nav-number">3.1.</span> <span class="nav-text">直接映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E7%9B%B8%E8%81%94"><span class="nav-number">3.2.</span> <span class="nav-text">全相联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E7%9B%B8%E8%81%94%E6%98%A0%E5%B0%84"><span class="nav-number">3.3.</span> <span class="nav-text">组相联映射</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">替换算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E7%AD%96%E7%95%A5"><span class="nav-number">5.</span> <span class="nav-text">写策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%82%A8%E5%AD%98%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">虚拟储存器</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -227,7 +235,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2021/11/08/my-note/">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/glass.jpg">
@@ -240,7 +248,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          编程用笔记(更新ing)
+          计算机组成原理-储存系统
         </h1>
 
         <div class="post-meta-container">
@@ -251,27 +259,18 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-11-08 17:33:01" itemprop="dateCreated datePublished" datetime="2021-11-08T17:33:01+08:00">2021-11-08</time>
+      <time title="创建时间：2022-06-15 11:21:44" itemprop="dateCreated datePublished" datetime="2022-06-15T11:21:44+08:00">2022-06-15</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2022-06-19 17:20:46" itemprop="dateModified" datetime="2022-06-19T17:20:46+08:00">2022-06-19</time>
+        <time title="修改时间：2022-06-25 13:11:57" itemprop="dateModified" datetime="2022-06-25T13:11:57+08:00">2022-06-25</time>
       </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
-        </span>
-    </span>
 
   
-    <span id="/2021/11/08/my-note/" class="post-meta-item leancloud_visitors" data-flag-title="编程用笔记(更新ing)" title="阅读次数">
+    <span id="/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="计算机组成原理-储存系统" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -287,8 +286,8 @@
       <span class="post-meta-item-text">Changyan：</span>
     
     
-      <a title="changyan" href="/2021/11/08/my-note/#SOHUCS" itemprop="discussionUrl">
-        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2021/11/08/my-note/" itemprop="commentCount"></span>
+      <a title="changyan" href="/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/06/15/计算机组成原理-储存系统/" itemprop="commentCount"></span>
       </a>
     
   </span>
@@ -303,41 +302,31 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><strong>前言</strong></p>
-<p><em>收集一些经常要搜的编程小知识</em><br><em>不定期更新  ︿(￣︶￣)︿</em></p>
- <img src="https://s2.loli.net/2021/12/15/2eoquz8pm6ArHMQ.jpg" style="width:50%">
+        <img src="https://" alt="" style="width:100%" />  
 
+<p><strong>前言</strong></p>
+<p><a href="https://sm.ms/image/GqxMmSXHt5fobK4" target="_blank"><img src="https://s2.loli.net/2022/06/25/GqxMmSXHt5fobK4.png" ></a></p>
+<p>三级存储结构：高速缓冲存储器、内存、外存</p>
+<p><a href="https://sm.ms/image/fAi3R8N9DSa1dTz" target="_blank"><img src="https://s2.loli.net/2022/06/24/fAi3R8N9DSa1dTz.png" ></a> </p>
 <span id="more"></span>
 
-<h1 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h1><p>文件夹<br>不要用大写<br>不要用大写<br>不要用大写</p>
-<h1 id="vscode-常用快捷键"><a href="#vscode-常用快捷键" class="headerlink" title="vscode 常用快捷键"></a>vscode 常用快捷键</h1><p>链接指路<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/hypon2016/article/details/80831266?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163767461216780265485668%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163767461216780265485668&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-80831266.first_rank_v2_pc_rank_v29&amp;utm_term=vscode%E5%BF%AB%E6%8D%B7%E9%94%AE&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/hypon2016/article/details/80831266?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163767461216780265485668%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163767461216780265485668&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-80831266.first_rank_v2_pc_rank_v29&amp;utm_term=vscode%E5%BF%AB%E6%8D%B7%E9%94%AE&amp;spm=1018.2226.3001.4187</a></p>
-<p>Shift+Alt + ↓ / ↑    向上/向下复制行 Copy line up/down<br>Ctrl+Home    转到文件开头 Go to beginning of file<br>Ctrl+End    转到文件末尾 Go to end of file<br>Ctrl+Enter    在下面插入行 Insert line below<br>Ctrl+Shift+Enter    在上面插入行 Insert line above<br>Ctrl+Shift+\    跳到匹配的括号 Jump to matching bracket<br>Ctrl+Shift+K    删除行 Delete line</p>
-<p>Ctrl+Shift+[    折叠（折叠）区域 Fold (collapse) region<br>Ctrl+Shift+]    展开（未折叠）区域 Unfold (uncollapse) region<br>Ctrl+K Ctrl+[    折叠（未折叠）所有子区域 Fold (collapse) all subregions<br>Ctrl+K Ctrl+]    展开（未折叠）所有子区域 Unfold (uncollapse) all subregions<br>Ctrl+K Ctrl+0    折叠（折叠）所有区域 Fold (collapse) all regions<br>Ctrl+K Ctrl+J    展开（未折叠）所有区域 Unfold (uncollapse) all regions多光标和选择 Multi-cursor and selection</p>
-<p>Alt +单击    插入光标 Insert cursor<br>Ctrl + Alt +↑/↓    在上/下插入光标 Insert cursor above / below<br>Ctrl + U    撤消上一个光标操作 Undo last cursor operation<br>Shift + Alt + I    在选定的每一行的末尾插入光标 Insert cursor at end of each line selected<br>Shift + Alt + →    展开选择 Expand selection<br>Shift + Alt + ←    缩小选择 Shrink selection</p>
-<h1 id="C-时间函数"><a href="#C-时间函数" class="headerlink" title="C++ 时间函数"></a>C++ 时间函数</h1><p>头文件：<br>#include &lt;windows.h&gt;</p>
-<figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">clock_t time_start, time_end;</span><br><span class="line"></span><br><span class="line">/* 获取开始时间 */</span><br><span class="line">time_start = GetTickCount(); //从操作系统启动经过的毫秒数</span><br><span class="line"></span><br><span class="line">time_end = GetTickCount();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; &quot;Time = &quot; &lt;&lt; (time_end - time_start) &lt;&lt; &quot;ms\n &quot;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h1 id="C-随机函数"><a href="#C-随机函数" class="headerlink" title="C++ 随机函数"></a>C++ 随机函数</h1><p>#define random(x) (rand()%x)<br>要取得[0,n)  就是rand（）%n     表示 从0到n-1的数</p>
-<p>要取得[a,b)的随机整数，使用(rand() % (b-a))+ a;<br>要取得[a,b]的随机整数，使用(rand() % (b-a+1))+ a;<br>要取得(a,b]的随机整数，使用(rand() % (b-a))+ a + 1;<br>通用公式:a + rand() % n；其中的a是起始值，n是整数的范围。<br>要取得a到b之间的随机整数，另一种表示：a + (int)b * rand() / (RAND_MAX + 1)。<br>要取得0～1之间的浮点数，可以使用rand() / double(RAND_MAX)。</p>
-<h1 id="malloc解析"><a href="#malloc解析" class="headerlink" title="malloc解析"></a>malloc解析</h1><p>引用：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/105090421">https://zhuanlan.zhihu.com/p/105090421</a></p>
-<p>头文件：#include &lt;malloc.h&gt; 或 #include &lt;alloc.h&gt; (注意：alloc.h 与 malloc.h 的内容是完全一致的。)</p>
-<p>功能：分配长度为num_bytes字节的内存块</p>
-<p>说明：如果分配成功则返回指向被分配内存的指针，否则返回空指针NULL。</p>
-<p>当内存不再使用时，应使用free()函数将内存块释放。</p>
-<p>解析：<br>malloc的意义是向 堆区 要了一块sizeof(int) * N 这么大的空间。<br>返回的是指针，所以在后期使用时要解引用。</p>
-<p>代码：</p>
-<figure class="highlight plaintext"><figcaption><span>[malloc解析] [lang:C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line">    int N = 0;</span><br><span class="line">    int* arr;</span><br><span class="line"></span><br><span class="line">    printf(&quot;请输入数组的大小\n&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;N);</span><br><span class="line"></span><br><span class="line">    arr = (int*)malloc(sizeof(int) * N);</span><br><span class="line"></span><br><span class="line">    printf(&quot;请输入%d个数</span><br></pre></td></tr></table></figure>
-
-<h1 id="auto的循环用法"><a href="#auto的循环用法" class="headerlink" title="auto的循环用法"></a>auto的循环用法</h1><p>for(auto &amp;a :b)</p>
-<p>输出的结果就是0—9这十个数。</p>
-<p>for(auto &amp;a : arr)中“auto &amp;a”就是变量名就和上一个for循环中的“int i”一样，</p>
-<p>与for(int i=0;i&lt;sizeof(arr)/sizeof(arr[0]);i++)是一样的。</p>
-<figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int arr[10];</span><br><span class="line">for(int i=0;i&lt;10;i++)</span><br><span class="line">&#123;</span><br><span class="line">  arr[i]=i;</span><br><span class="line">&#125;</span><br><span class="line">for(auto &amp;a:arr)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>未完待续 (°ー°〃)</strong></p>
+<h1 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h1><p>Cache：高速缓冲存储器<br>容量小：几百KB~几MB<br>cache采用静态存储器技术，每位至少需要6个晶体管，直接用触发器方式维持固定的逻辑，所以不需要刷新<br>与内核紧密相连，采用高速同步运行</p>
+<h1 id="执行原理"><a href="#执行原理" class="headerlink" title="执行原理"></a>执行原理</h1><p><a href="https://sm.ms/image/1IScn824AOelkrE" target="_blank"><img src="https://s2.loli.net/2022/06/24/1IScn824AOelkrE.png" ></a></p>
+<p>CPU从内存访问第一条指令<br>同时将第一条指令所在的页内容复制到cache中</p>
+<p>CPU从cache中查找下一条要执行的指令<br>查找到(命中)，从cache中取指令，执行</p>
+<p>查找不到，从内存中取指令<br>同时将该指令所在的页内容复制到cache中</p>
+<p><a href="https://sm.ms/image/71bFwBuyXfI3aOg" target="_blank"><img src="https://s2.loli.net/2022/06/24/71bFwBuyXfI3aOg.png" ></a></p>
+<h1 id="访问原理"><a href="#访问原理" class="headerlink" title="访问原理"></a>访问原理</h1><h2 id="直接映射"><a href="#直接映射" class="headerlink" title="直接映射"></a>直接映射</h2><p><a href="https://sm.ms/image/DcJoZ5kjd9bfMNK" target="_blank"><img src="https://s2.loli.net/2022/06/24/DcJoZ5kjd9bfMNK.png" ></a></p>
+<p>把主存的每一块映射到一个固定的Cache槽中。<br>j=i mod 2c，<br>j为Cache槽号<br>i为主存的块号，<br>2c为Cache的槽数。<br>优点：实现简单、花费少。<br>缺点：Cache利用率不高。</p>
+<h2 id="全相联"><a href="#全相联" class="headerlink" title="全相联"></a>全相联</h2><p>通过允许每个主存块装入到Cache的任何一槽中来克服直接映射的缺点</p>
+<h2 id="组相联映射"><a href="#组相联映射" class="headerlink" title="组相联映射"></a>组相联映射</h2><p><a href="https://sm.ms/image/JtmLc9T6D3MbCrv" target="_blank"><img src="https://s2.loli.net/2022/06/24/JtmLc9T6D3MbCrv.png" ></a><br>上述两种方案的折中。<br>按号分组 组内随意放<br>把Cache分成2C’组<br>每组有2r个槽<br>2C =2C’×2r<br>j=(i mod 2C’)* 2r +k<br>(k=0，1，…，2r-1)</p>
+<h1 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h1><p><a href="https://sm.ms/image/KEGcbyUmNiJzu7Y" target="_blank"><img src="https://s2.loli.net/2022/06/24/KEGcbyUmNiJzu7Y.png" ></a></p>
+<p><a href="https://sm.ms/image/GubwWY1dnm85Dr2" target="_blank"><img src="https://s2.loli.net/2022/06/24/GubwWY1dnm85Dr2.png" ></a></p>
+<p><a href="https://sm.ms/image/KtrxRQVGBmcWay5" target="_blank"><img src="https://s2.loli.net/2022/06/24/KtrxRQVGBmcWay5.png" ></a></p>
+<h1 id="写策略"><a href="#写策略" class="headerlink" title="写策略"></a>写策略</h1><p>主存和cache中数据一致性问题的解决办法：<br>  写通过（Write through）：所有的写操作对主存和Cache同时进行。<br>  <strong>直写法不需要维护位</strong></p>
+<p>  回写（write back）：只在Cache中修改，当进行修改时，设置与槽有关的修改位。因此，当某个块被替换时，当且仅当修改位被设置时，才将它写回主存。<br>  <strong>写回法需要一位的维护位</strong></p>
+<p>当系统中存在多个Cache时，解决多个Cache中数据的一致性问题的方法：<br>  总线监视法<br>  硬件监视法<br>  划出不可高速缓存存储区法</p>
+<h1 id="虚拟储存器"><a href="#虚拟储存器" class="headerlink" title="虚拟储存器"></a>虚拟储存器</h1><p>虚拟存储器指的是“主存-辅存”层次，它能使计算机具有辅存的容量，接近于主存的速度和辅存的每位成本。使程序员可以按比主存大得多的空间来编制程序，即按虚存空间编址。</p>
 <hr />
 版权信息
     </div>
@@ -365,22 +354,16 @@
   </div>
 </div>
 
-          <div class="post-tags">
-              <a href="/tags/C/" rel="tag"># C++</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/11/01/hexo-note/" rel="prev" title="hexo使用指南">
-                  <i class="fa fa-chevron-left"></i> hexo使用指南
+                <a href="/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8/" rel="prev" title="计算机组成原理-中央处理器">
+                  <i class="fa fa-chevron-left"></i> 计算机组成原理-中央处理器
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/11/28/%E9%93%BE%E8%A1%A8%E5%BD%92%E5%B9%B6/" rel="next" title="链表下的归并排序">
-                  链表下的归并排序 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
