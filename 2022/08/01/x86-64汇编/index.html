@@ -22,23 +22,33 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akkaduilin.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","width":240,"display":"always","padding":18,"offset":12,"b2t":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"buttons","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/public/search.xml","localsearch":{"enable":"ture","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="咸鱼享乐，摸鱼快乐">
-<meta property="og:url" content="http://akkaduilin.com/archives/2021/12/page/2/index.html">
+<meta name="description" content="前言 汇编代码和原始的C代码相差比较大，一些通常对C语言程序员隐蔽的处理器状态是可见的： 程序计数器(PC，用 %eip 表示)指示将要执行的下一条指令在存储器中的地址。整数寄存器文件包含 8 个命名的位置，分别存储 32 位的值。这些寄存器可以存储地址(对应于 C 语言的指针)或证书数据。有的寄存器被用来记录某些重要的程序状态，而其他的寄存器则用来保存临时数据。条件码(codition">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编代码">
+<meta property="og:url" content="http://akkaduilin.com/2022/08/01/x86-64%E6%B1%87%E7%BC%96/index.html">
 <meta property="og:site_name" content="咸鱼享乐，摸鱼快乐">
+<meta property="og:description" content="前言 汇编代码和原始的C代码相差比较大，一些通常对C语言程序员隐蔽的处理器状态是可见的： 程序计数器(PC，用 %eip 表示)指示将要执行的下一条指令在存储器中的地址。整数寄存器文件包含 8 个命名的位置，分别存储 32 位的值。这些寄存器可以存储地址(对应于 C 语言的指针)或证书数据。有的寄存器被用来记录某些重要的程序状态，而其他的寄存器则用来保存临时数据。条件码(codition">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:///">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/JV4Sr8Dpyq9HzZx.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/bJ84KYTCsHigZP7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/jLvqNehi8JEPsUr.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/JV4Sr8Dpyq9HzZx.png">
+<meta property="article:published_time" content="2022-08-01T08:22:24.000Z">
+<meta property="article:modified_time" content="2022-08-02T06:30:33.989Z">
 <meta property="article:author" content="不对de林">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:///">
 
 
-<link rel="canonical" href="http://akkaduilin.com/archives/2021/12/page/2/">
+<link rel="canonical" href="http://akkaduilin.com/2022/08/01/x86-64%E6%B1%87%E7%BC%96/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2021/12/page/2/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://akkaduilin.com/2022/08/01/x86-64%E6%B1%87%E7%BC%96/","path":"2022/08/01/x86-64汇编/","title":"汇编代码"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | 咸鱼享乐，摸鱼快乐</title>
+<title>汇编代码 | 咸鱼享乐，摸鱼快乐</title>
   
 
 
@@ -131,7 +141,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -144,6 +154,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="nav-number">2.</span> <span class="nav-text">操作数指示符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">数据传送指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">算术逻辑操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xx2x"><span class="nav-number">5.</span> <span class="nav-text">xx2x</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xx3x"><span class="nav-number">6.</span> <span class="nav-text">xx3x</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,54 +219,150 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 46 篇日志。 继续努力。</span>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://akkaduilin.com/2022/08/01/x86-64%E6%B1%87%E7%BC%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/glass.jpg">
+      <meta itemprop="name" content="不对de林">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咸鱼享乐，摸鱼快乐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          汇编代码
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-01 16:22:24" itemprop="dateCreated datePublished" datetime="2022-08-01T16:22:24+08:00">2022-08-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-08-02 14:30:33" itemprop="dateModified" datetime="2022-08-02T14:30:33+08:00">2022-08-02</time>
+      </span>
+
+  
+    <span id="/2022/08/01/x86-64%E6%B1%87%E7%BC%96/" class="post-meta-item leancloud_visitors" data-flag-title="汇编代码" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    
+      <a title="changyan" href="/2022/08/01/x86-64%E6%B1%87%E7%BC%96/#SOHUCS" itemprop="discussionUrl">
+        <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2022/08/01/x86-64汇编/" itemprop="commentCount"></span>
+      </a>
+    
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="https://" alt="" style="width:100%" />  
+
+<p><strong>前言</strong></p>
+<p>汇编代码和原始的C代码相差比较大，一些通常对C语言程序员隐蔽的处理器状态是可见的：</p>
+<p>程序计数器(PC，用 %eip 表示)指示将要执行的下一条指令在存储器中的地址。<br>整数寄存器文件包含 8 个命名的位置，分别存储 32 位的值。这些寄存器可以存储地址(对应于 C 语言的指针)或证书数据。有的寄存器被用来记录某些重要的程序状态，而其他的寄存器则用来保存临时数据。<br>条件码(codition code)寄存器保存着最近执行的算术或逻辑指令的状态信息。它们用来实现控制或数据流中的条件变化。<br>一组浮点寄存器存放浮点数据。</p>
+<span id="more"></span>
+
+<h1 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h1><p><a href="https://sm.ms/image/JV4Sr8Dpyq9HzZx" target="_blank"><img src="https://s2.loli.net/2022/08/02/JV4Sr8Dpyq9HzZx.png" ></a></p>
+<h1 id="操作数指示符"><a href="#操作数指示符" class="headerlink" title="操作数指示符"></a>操作数指示符</h1><p>大多数指令有一个或多个操作数(operand)，指示出执行一个操作中要引用的源数据值，以及放置结果的目标位置。操作数可能被分为三种类型：</p>
+<ol>
+<li>立即数(immediate)，也就是常数值</li>
+<li>寄存器(register)，表示某个寄存器的内容</li>
+<li>存储器(memory)引用，它会根据计算出来的地址访问某个存储器位置</li>
+</ol>
+<p><a href="https://sm.ms/image/bJ84KYTCsHigZP7" target="_blank"><img src="https://s2.loli.net/2022/08/02/bJ84KYTCsHigZP7.png" ></a></p>
+<h1 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h1><p><a href="https://sm.ms/image/jLvqNehi8JEPsUr" target="_blank"><img src="https://s2.loli.net/2022/08/02/jLvqNehi8JEPsUr.png" ></a></p>
+<h1 id="算术逻辑操作"><a href="#算术逻辑操作" class="headerlink" title="算术逻辑操作"></a>算术逻辑操作</h1><p><a href="https://sm.ms/image/JV4Sr8Dpyq9HzZx" target="_blank"><img src="https://s2.loli.net/2022/08/02/JV4Sr8Dpyq9HzZx.png" ></a></p>
+<h1 id="xx2x"><a href="#xx2x" class="headerlink" title="xx2x"></a>xx2x</h1><h1 id="xx3x"><a href="#xx3x" class="headerlink" title="xx3x"></a>xx3x</h1><hr />
+版权信息
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-12-01T17:19:51+08:00"
-              content="2021-12-01">
-          12-01
-        </time>
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="不对de林 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="不对de林 支付宝">
+        <span>支付宝</span>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/01/%E6%8E%92%E5%BA%8F/" itemprop="url">
-            <span itemprop="name">五种排序</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-
-    </div>
   </div>
-  
-  
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2021/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2021/12/">1</a><span class="page-number current">2</span>
-  </nav>
+</div>
 
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%82%A8%E5%AD%98%E7%B3%BB%E7%BB%9F/" rel="prev" title="计算机组成原理-储存系统">
+                  <i class="fa fa-chevron-left"></i> 计算机组成原理-储存系统
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS"></div>
 </div>
   </main>
 
