@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2021/12/15/2eoquz8pm6ArHMQ.jpg">
 <meta property="article:published_time" content="2021-11-08T09:33:01.000Z">
-<meta property="article:modified_time" content="2022-06-19T09:20:46.146Z">
+<meta property="article:modified_time" content="2022-10-13T16:35:53.047Z">
 <meta property="article:author" content="不对de林">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -166,18 +166,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags">
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -258,7 +258,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2022-06-19 17:20:46" itemprop="dateModified" datetime="2022-06-19T17:20:46+08:00">2022-06-19</time>
+        <time title="修改时间：2022-10-14 00:35:53" itemprop="dateModified" datetime="2022-10-14T00:35:53+08:00">2022-10-14</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -314,28 +314,27 @@
 <p>Shift+Alt + ↓ / ↑    向上/向下复制行 Copy line up/down<br>Ctrl+Home    转到文件开头 Go to beginning of file<br>Ctrl+End    转到文件末尾 Go to end of file<br>Ctrl+Enter    在下面插入行 Insert line below<br>Ctrl+Shift+Enter    在上面插入行 Insert line above<br>Ctrl+Shift+\    跳到匹配的括号 Jump to matching bracket<br>Ctrl+Shift+K    删除行 Delete line</p>
 <p>Ctrl+Shift+[    折叠（折叠）区域 Fold (collapse) region<br>Ctrl+Shift+]    展开（未折叠）区域 Unfold (uncollapse) region<br>Ctrl+K Ctrl+[    折叠（未折叠）所有子区域 Fold (collapse) all subregions<br>Ctrl+K Ctrl+]    展开（未折叠）所有子区域 Unfold (uncollapse) all subregions<br>Ctrl+K Ctrl+0    折叠（折叠）所有区域 Fold (collapse) all regions<br>Ctrl+K Ctrl+J    展开（未折叠）所有区域 Unfold (uncollapse) all regions多光标和选择 Multi-cursor and selection</p>
 <p>Alt +单击    插入光标 Insert cursor<br>Ctrl + Alt +↑/↓    在上/下插入光标 Insert cursor above / below<br>Ctrl + U    撤消上一个光标操作 Undo last cursor operation<br>Shift + Alt + I    在选定的每一行的末尾插入光标 Insert cursor at end of each line selected<br>Shift + Alt + →    展开选择 Expand selection<br>Shift + Alt + ←    缩小选择 Shrink selection</p>
-<h1 id="C-时间函数"><a href="#C-时间函数" class="headerlink" title="C++ 时间函数"></a>C++ 时间函数</h1><p>头文件：<br>#include &lt;windows.h&gt;</p>
-<figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">clock_t time_start, time_end;</span><br><span class="line"></span><br><span class="line">/* 获取开始时间 */</span><br><span class="line">time_start = GetTickCount(); //从操作系统启动经过的毫秒数</span><br><span class="line"></span><br><span class="line">time_end = GetTickCount();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; &quot;Time = &quot; &lt;&lt; (time_end - time_start) &lt;&lt; &quot;ms\n &quot;;</span><br></pre></td></tr></table></figure>
+<h1 id="C-时间函数"><a href="#C-时间函数" class="headerlink" title="C++ 时间函数"></a>C++ 时间函数</h1><p>头文件：<br><code>#include &lt;windows.h&gt;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">clock_t</span> time_start, time_end;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 获取开始时间 */</span></span><br><span class="line">time_start = <span class="built_in">GetTickCount</span>(); <span class="comment">//从操作系统启动经过的毫秒数</span></span><br><span class="line"></span><br><span class="line">time_end = <span class="built_in">GetTickCount</span>();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;Time = &quot;</span> &lt;&lt; (time_end - time_start) &lt;&lt; <span class="string">&quot;ms\n &quot;</span>;</span><br></pre></td></tr></table></figure>
 
 
 
 
-<h1 id="C-随机函数"><a href="#C-随机函数" class="headerlink" title="C++ 随机函数"></a>C++ 随机函数</h1><p>#define random(x) (rand()%x)<br>要取得[0,n)  就是rand（）%n     表示 从0到n-1的数</p>
+
+<h1 id="C-随机函数"><a href="#C-随机函数" class="headerlink" title="C++ 随机函数"></a>C++ 随机函数</h1><p><code>#define random(x) (rand()%x)</code><br>要取得[0,n)  就是rand（）%n     表示 从0到n-1的数</p>
 <p>要取得[a,b)的随机整数，使用(rand() % (b-a))+ a;<br>要取得[a,b]的随机整数，使用(rand() % (b-a+1))+ a;<br>要取得(a,b]的随机整数，使用(rand() % (b-a))+ a + 1;<br>通用公式:a + rand() % n；其中的a是起始值，n是整数的范围。<br>要取得a到b之间的随机整数，另一种表示：a + (int)b * rand() / (RAND_MAX + 1)。<br>要取得0～1之间的浮点数，可以使用rand() / double(RAND_MAX)。</p>
 <h1 id="malloc解析"><a href="#malloc解析" class="headerlink" title="malloc解析"></a>malloc解析</h1><p>引用：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/105090421">https://zhuanlan.zhihu.com/p/105090421</a></p>
-<p>头文件：#include &lt;malloc.h&gt; 或 #include &lt;alloc.h&gt; (注意：alloc.h 与 malloc.h 的内容是完全一致的。)</p>
+<p>头文件：<code>#include &lt;malloc.h&gt;</code> 或 <code>#include &lt;alloc.h&gt;</code>(注意：alloc.h 与 malloc.h 的内容是完全一致的。)</p>
 <p>功能：分配长度为num_bytes字节的内存块</p>
 <p>说明：如果分配成功则返回指向被分配内存的指针，否则返回空指针NULL。</p>
 <p>当内存不再使用时，应使用free()函数将内存块释放。</p>
 <p>解析：<br>malloc的意义是向 堆区 要了一块sizeof(int) * N 这么大的空间。<br>返回的是指针，所以在后期使用时要解引用。</p>
 <p>代码：</p>
-<figure class="highlight plaintext"><figcaption><span>[malloc解析] [lang:C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">    int i = 0;</span><br><span class="line">    int N = 0;</span><br><span class="line">    int* arr;</span><br><span class="line"></span><br><span class="line">    printf(&quot;请输入数组的大小\n&quot;);</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;N);</span><br><span class="line"></span><br><span class="line">    arr = (int*)malloc(sizeof(int) * N);</span><br><span class="line"></span><br><span class="line">    printf(&quot;请输入%d个数</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span>* arr;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入数组的大小\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line"></span><br><span class="line">    arr = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>) * N);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入%d个数</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="auto的循环用法"><a href="#auto的循环用法" class="headerlink" title="auto的循环用法"></a>auto的循环用法</h1><p>for(auto &amp;a :b)</p>
-<p>输出的结果就是0—9这十个数。</p>
-<p>for(auto &amp;a : arr)中“auto &amp;a”就是变量名就和上一个for循环中的“int i”一样，</p>
-<p>与for(int i=0;i&lt;sizeof(arr)/sizeof(arr[0]);i++)是一样的。</p>
-<figure class="highlight plaintext"><figcaption><span>[xxxxxx] [lang:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int arr[10];</span><br><span class="line">for(int i=0;i&lt;10;i++)</span><br><span class="line">&#123;</span><br><span class="line">  arr[i]=i;</span><br><span class="line">&#125;</span><br><span class="line">for(auto &amp;a:arr)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="auto的循环用法"><a href="#auto的循环用法" class="headerlink" title="auto的循环用法"></a>auto的循环用法</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;a :b)</span><br><span class="line"></span><br><span class="line">输出的结果就是<span class="number">0</span>—<span class="number">9</span>这十个数。</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;a : arr)中“<span class="keyword">auto</span> &amp;a”就是变量名就和上一个<span class="keyword">for</span>循环中的“<span class="keyword">int</span> i”一样，</span><br><span class="line"></span><br><span class="line">与<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in"><span class="keyword">sizeof</span></span>(arr)/<span class="built_in"><span class="keyword">sizeof</span></span>(arr[<span class="number">0</span>]);i++)是一样的。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">  arr[i]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;a:arr)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
 <p><strong>未完待续 (°ー°〃)</strong></p>
 <hr />
@@ -363,6 +362,24 @@
       </div>
 
   </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>不对de林
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://akkaduilin.com/2021/11/08/my-note/" title="编程用笔记(更新ing)">http://akkaduilin.com/2021/11/08/my-note/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+  
+</ul>
 </div>
 
           <div class="post-tags">
@@ -402,7 +419,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
